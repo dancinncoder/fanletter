@@ -28,19 +28,19 @@ function App() {
     [
       {id: 1, username: "Hamin", date: "23.11.03", time:"오전 11:07:09", content:"I love you Paul!", toPaul: true, character:"Paul"}
       ,
-      {id: 2, username: "Rose", date: "23.11.03", time:"오전 11:07:09", content:"I like you Paul!", toPaul: false, character:"Paul"}
+      {id: 2, username: "Rose", date: "23.11.03", time:"오전 11:07:09", content:"I like you Paul!", toPaul: true, character:"Paul"}
       ,
-      {id: 3, username: "Guigui", date: "23.11.03", time:"오전 11:07:09", content:"I love you Elio!", toElio: false, character:"Elio"}
+      {id: 3, username: "Guigui", date: "23.11.03", time:"오전 11:07:09", content:"I love you Elio!", toElio: true, character:"Elio"}
       ,
-      {id: 4, username: "Tom", date: "23.11.03", time:"오전 11:07:09", content:"I like you Elio!", toElio: false, character:"Elio"}
+      {id: 4, username: "Tom", date: "23.11.03", time:"오전 11:07:09", content:"I like you Elio!", toElio: true, character:"Elio"}
       ,
-      {id: 5, username: "Mark", date: "23.11.03", time:"오전 11:07:09", content:"I love you Gatsby!", toGatsby: false, character:"Gatsby"}
+      {id: 5, username: "Mark", date: "23.11.03", time:"오전 11:07:09", content:"I love you Gatsby!", toGatsby: true, character:"Gatsby"}
       ,
-      {id: 6, username: "Sandra", date: "23.11.03", time:"오전 11:07:09", content:"I like you Gatsby!", toGatsby: false, character:"Gatsby"}
+      {id: 6, username: "Sandra", date: "23.11.03", time:"오전 11:07:09", content:"I like you Gatsby!", toGatsby: true, character:"Gatsby"}
       ,
-      {id: 7, username: "Yuri", date: "23.11.03", time:"오전 11:07:09", content:"I love you Lee!", toLee: false, character:"Lee"}
+      {id: 7, username: "Yuri", date: "23.11.03", time:"오전 11:07:09", content:"I love you Lee!", toLee: true, character:"Lee"}
       ,
-      {id: 8, username: "Vik", date: "23.11.03", time:"오전 11:07:09", content:"I like you Lee!", toLee: false, character:"Lee"}
+      {id: 8, username: "Vik", date: "23.11.03", time:"오전 11:07:09", content:"I like you Lee!", toLee: true, character:"Lee"}
       ,
     ]
   );
@@ -69,18 +69,31 @@ function App() {
             />
             <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb2mdiC%2Fbtsz6vZ0AJC%2FMCCSeykgsK4zkmNrF4202k%2Fimg.png"/>
           </ImgBtnBox>
-          {paulLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} toPaul={true}/>
+          {/* 여기서 이름별로 필터링 해야 하는데.. */}
+          {paulLetterShown && (
+            <List letters={letters.filter((letter) => letter.character === 'Paul')} setLetters={setLetters} />
+          )}
+          {elioLetterShown && (
+            <List letters={letters.filter((letter) => letter.character === 'Elio')} setLetters={setLetters} />
+          )}
+          {gatsbyLetterShown && (
+            <List letters={letters.filter((letter) => letter.character === 'Gatsby')} setLetters={setLetters} />
+          )}
+          {leeLetterShown && (
+            <List letters={letters.filter((letter) => letter.character === 'Lee')} setLetters={setLetters} />
+          )}
+          {/* {paulLetterShown === true ? (
+            <List letters={letters} setLetters={setLetters} />
           ) : ("")}
           {elioLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} toElio={true}/>
+            <List letters={letters} setLetters={setLetters} />
           ) : ("")}
           {gatsbyLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} toGatsby={true}/>
+            <List letters={letters} setLetters={setLetters} />
           ) : ("")}
           {leeLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} toLee={true}/>
-          ) : ("")}
+            <List letters={letters} setLetters={setLetters} />
+          ) : ("")} */}
 
         </Display>
       </main>

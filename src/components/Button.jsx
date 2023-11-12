@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import React from 'react';
 import {useState} from 'react';
+import { useEffect } from 'react';
 
 const ButtonBox = styled.div`
   display: flex;
@@ -37,16 +38,48 @@ function Button({paulLetterShown, setPaulLetterShown, elioLetterShown, setElioLe
     ]
   );
 
+  // 첫화면에 paul 버튼 활성화 세팅
+  // const useEffect(()=> {
+  //   buttonText.name === 'paul';
+  // }, []);
+
+  const buttonByNameClickHandler = (item) => {
+    switch (item.name) {
+      case 'Paul':
+        setPaulLetterShown(true);
+        setElioLetterShown(false);
+        setGatsbyLetterShown(false);
+        setLeeLetterShown(false);
+        break;
+      case 'Elio':
+        setElioLetterShown(true);
+        setPaulLetterShown(false);
+        setGatsbyLetterShown(false);
+        setLeeLetterShown(false);
+        break;
+      case 'Gatsby':
+        setGatsbyLetterShown(true);
+        setElioLetterShown(false);
+        setPaulLetterShown(false);
+        setLeeLetterShown(false);
+        break;
+      case 'Lee':
+        setLeeLetterShown(true);
+        setGatsbyLetterShown(false);
+        setElioLetterShown(false);
+        setPaulLetterShown(false);
+        break;
+      default:
+        break;
+    }
+  }
+
+
   return (
     <ButtonBox>
       {buttonText.map((item)=>{
         return(
-          <ButtonI key={item.id} onClick={()=>{
-            if (item.name === letters.character){
-              const setLetterShown = `set${letters.character}LetterShown`;
-              this[setLetterShown](true);
-            }
-          }}>{item.name}</ButtonI>
+          <ButtonI key={item.id} onClick={()=> buttonByNameClickHandler(item)}>{item.name}</ButtonI>
         );
       })}
     </ButtonBox>

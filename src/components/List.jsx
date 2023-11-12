@@ -11,7 +11,13 @@ const ListArea = styled.div`
 function List({letters, setLetters}) {
   return (
     <ListArea>
-      {letters.map((letter)=>{
+      {letters.filter((l)=>{
+        const a = l.character; //Elio
+        console.log('HERE',l[`to${a}`]); //객체의키이름에서 변수${}로 동적으로 처리하기
+        return l[`to${a}`] === true; //toElio === true;
+        
+      })
+      .map((letter)=>{
         return(
           <div key={uuid()}>
             <h3>{letter.username}</h3>
