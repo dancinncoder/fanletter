@@ -5,7 +5,9 @@ import uuid from 'react-uuid';
 const ListArea = styled.div`
   border: 1px solid black;
   width: 400px;
-  height: 500px;
+  height: 450px;
+  margin: 30px 5px 5px 5px;
+  /* overflow-y: scroll; */
 `;
 
 function List({letters, setLetters}) {
