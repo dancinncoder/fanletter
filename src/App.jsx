@@ -3,6 +3,7 @@
 import { styled } from 'styled-components';
 // Hooks
 import {useState} from 'react';
+import uuid from 'react-uuid';
 // Components
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -24,23 +25,25 @@ const ImgBtnBox = styled.div`
 
 function App() {
 
+
+
   const [letters, setLetters] = useState(
     [
-      {id: 1, username: "Hamin", createdAt: "23.11.03", time:"오전 11:07:09", content:"I love you Paul!", writedTo: "Paul", character:"Paul", }
+      {id: uuid(), userName: "Hamin", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Paul!", writedTo: "Paul", character:"Paul", }
       ,
-      {id: 2, username: "Rose", createdAt: "23.11.03", time:"오전 11:07:09", content:"I like you Paul!", writedTo: "Paul", character:"Paul"}
+      {id: uuid(), userName: "Rose", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Paul!", writedTo: "Paul", character:"Paul"}
       ,
-      {id: 3, username: "Guigui", createdAt: "23.11.03", time:"오전 11:07:09", content:"I love you Elio!", writedTo: "Elio", character:"Elio"}
+      {id: uuid(), userName: "Guigui", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Elio!", writedTo: "Elio", character:"Elio"}
       ,
-      {id: 4, username: "Tom", createdAt: "23.11.03", time:"오전 11:07:09", content:"I like you Elio!", writedTo: "Elio", character:"Elio"}
+      {id: uuid(), userName: "Tom", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Elio!", writedTo: "Elio", character:"Elio"}
       ,
-      {id: 5, username: "Mark", createdAt: "23.11.03", time:"오전 11:07:09", content:"I love you Gatsby!", writedTo: "Gatsby", character:"Gatsby"}
+      {id: uuid(), userName: "Mark", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Gatsby!", writedTo: "Gatsby", character:"Gatsby"}
       ,
-      {id: 6, username: "Sandra", createdAt: "23.11.03", time:"오전 11:07:09", content:"I like you Gatsby!", writedTo: "Gatsby", character:"Gatsby"}
+      {id: uuid(), userName: "Sandra", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Gatsby!", writedTo: "Gatsby", character:"Gatsby"}
       ,
-      {id: 7, username: "Yuri", createdAt: "23.11.03", time:"오전 11:07:09", content:"I love you Lee!", writedTo: "Lee", character:"Lee"}
+      {id: uuid(), userName: "Yuri", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Lee!", writedTo: "Lee", character:"Lee"}
       ,
-      {id: 8, username: "Vik", createdAt: "23.11.03", time:"오전 11:07:09", content:"I like you Lee!", writedTo: "Lee", character:"Lee", }
+      {id: uuid(), userName: "Vik", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Lee!", writedTo: "Lee", character:"Lee", }
       ,
     ]
   );
@@ -58,16 +61,15 @@ function App() {
   // );
 
 
-
-
   const [paulLetterShown, setPaulLetterShown] = useState(true);
   const [elioLetterShown, setElioLetterShown] = useState(true);
   const [gatsbyLetterShown, setGatsbyLetterShown] = useState(true);
   const [leeLetterShown, setLeeLetterShown] = useState(true);
 
+
   return (
     <div>
-      <Header />
+      <Header letters={letters} setLetters={setLetters}/>
       <main>
         <Display>
           <ImgBtnBox>
