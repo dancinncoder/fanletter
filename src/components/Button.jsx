@@ -26,7 +26,7 @@ const ButtonI = styled.button`
 `;
 
 
-function Button({paulLetterShown, setPaulLetterShown, elioLetterShown, setElioLetterShown, gatsbyLetterShown, setGatsbyLetterShown, leeLetterShown, setLeeLetterShown, letters })
+function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, setLeeLetterShown})
 {
 
   const [buttonText, setButtonText] = useState(

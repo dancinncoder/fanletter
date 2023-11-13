@@ -10,6 +10,7 @@ const FooterArea = styled.footer`
   background-color: black;
   color: white;
   height: 100px;
+  margin: 50px 0 0 0;
 `;
 
 function Footer() {

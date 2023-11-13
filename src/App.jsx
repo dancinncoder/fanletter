@@ -29,21 +29,21 @@ function App() {
 
   const [letters, setLetters] = useState(
     [
-      {id: uuid(), userName: "Hamin", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Paul!", writedTo: "Paul", character:"Paul", }
+      {id: uuid(), userName: "Hamin", createdAt: "23.11.03 오전 11:07:09", message:"I love you Paul!", wroteTo: "Paul", character:"Paul", }
       ,
-      {id: uuid(), userName: "Rose", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Paul!", writedTo: "Paul", character:"Paul"}
+      {id: uuid(), userName: "Rose", createdAt: "23.11.03 오전 11:07:09", message:"I like you Paul!", wroteTo: "Paul", character:"Paul"}
       ,
-      {id: uuid(), userName: "Guigui", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Elio!", writedTo: "Elio", character:"Elio"}
+      {id: uuid(), userName: "Guigui", createdAt: "23.11.03 오전 11:07:09", message:"I love you Elio!", wroteTo: "Elio", character:"Elio"}
       ,
-      {id: uuid(), userName: "Tom", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Elio!", writedTo: "Elio", character:"Elio"}
+      {id: uuid(), userName: "Tom", createdAt: "23.11.03 오전 11:07:09", message:"I like you Elio!", wroteTo: "Elio", character:"Elio"}
       ,
-      {id: uuid(), userName: "Mark", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Gatsby!", writedTo: "Gatsby", character:"Gatsby"}
+      {id: uuid(), userName: "Mark", createdAt: "23.11.03 오전 11:07:09", message:"I love you Gatsby!", wroteTo: "Gatsby", character:"Gatsby"}
       ,
-      {id: uuid(), userName: "Sandra", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Gatsby!", writedTo: "Gatsby", character:"Gatsby"}
+      {id: uuid(), userName: "Sandra", createdAt: "23.11.03 오전 11:07:09", message:"I like you Gatsby!", wroteTo: "Gatsby", character:"Gatsby"}
       ,
-      {id: uuid(), userName: "Yuri", createdAt: "23.11.03", time:"오전 11:07:09", message:"I love you Lee!", writedTo: "Lee", character:"Lee"}
+      {id: uuid(), userName: "Yuri", createdAt: "23.11.03 오전 11:07:09", message:"I love you Lee!", wroteTo: "Lee", character:"Lee"}
       ,
-      {id: uuid(), userName: "Vik", createdAt: "23.11.03", time:"오전 11:07:09", message:"I like you Lee!", writedTo: "Lee", character:"Lee", }
+      {id: uuid(), userName: "Vik", createdAt: "23.11.03 오전 11:07:09", message:"I like you Lee!", wroteTo: "Lee", character:"Lee", }
       ,
     ]
   );
@@ -84,30 +84,17 @@ function App() {
           </ImgBtnBox>
           {/* 여기서 이름별로 필터링 해야 하는데.. */}
           {paulLetterShown && (
-            <List letters={letters.filter((letter) => letter.writedTo === 'Paul')} setLetters={setLetters}/>
+            <List letters={letters.filter((letter) => letter.wroteTo === 'Paul')} setLetters={setLetters}/>
           )}
           {elioLetterShown && (
-            <List letters={letters.filter((letter) => letter.writedTo === 'Elio')} setLetters={setLetters}/>
+            <List letters={letters.filter((letter) => letter.wroteTo === 'Elio')} setLetters={setLetters}/>
           )}
           {gatsbyLetterShown && (
-            <List letters={letters.filter((letter) => letter.writedTo === 'Gatsby')} setLetters={setLetters}/>
+            <List letters={letters.filter((letter) => letter.wroteTo === 'Gatsby')} setLetters={setLetters}/>
           )}
           {leeLetterShown && (
-            <List letters={letters.filter((letter) => letter.writedTo === 'Lee')} setLetters={setLetters}/>
+            <List letters={letters.filter((letter) => letter.wroteTo === 'Lee')} setLetters={setLetters}/>
           )}
-          {/* {paulLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} />
-          ) : ("")}
-          {elioLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} />
-          ) : ("")}
-          {gatsbyLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} />
-          ) : ("")}
-          {leeLetterShown === true ? (
-            <List letters={letters} setLetters={setLetters} />
-          ) : ("")} */}
-
         </Display>
       </main>
       <Footer />
