@@ -2,6 +2,7 @@ import React from 'react'
 import {styled} from "styled-components";
 import {useState} from 'react';
 import uuid from 'react-uuid';
+import moment from 'moment';
 import { useEffect } from 'react';
 
 const HeaderArea = styled.header`
@@ -13,15 +14,27 @@ const HeaderArea = styled.header`
   border: 1px solid black;
 `;
 
-// const headerInput = {userName, setUserName, message, setMessage, wroteTo, setWroteTo, createAt, setCreateAt, time, setTime, character, setCharacter };
+const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;
 
-function Header({letters, setLetters}) {
+const MessageInput = styled.input`
+  width: 180px;
+`;
+
+const UserNameInput = styled.input`
+  width: 110px;
+`;
+
+function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
 
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [wroteTo, setWroteTo] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
-  const [character, setCharacter] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState("Paul");
   const [formValue, setFormValue] = useState({
     id: uuid(), userName: userName, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
@@ -33,7 +46,7 @@ function Header({letters, setLetters}) {
     setMessage(event.target.value);
   }
 
-  // 초기화면 로딩 시 최초 1번, select option 'Paul' 디폴트 값 보내기
+  // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {
     setFormValue(selectedCharacter);
     console.log('최초 selected name is :',selectedCharacter);
@@ -41,9 +54,6 @@ function Header({letters, setLetters}) {
 
   // SELECTING OPTION SETTING
   const selectHandler = (event) => {
-    // setFormValue(event.target.value); // Elio..
-    // console.log('selected character name :', event.target.value); 
-
     const selectedValue = event.target.value;
 
     // Update selectedCharacter state
@@ -51,33 +61,46 @@ function Header({letters, setLetters}) {
 
     // Update formValue with the selected character
     setFormValue((prevFormValue)=> (
-      {...prevFormValue, wroteTo: selectedValue, character: selectedValue,}
+      {...prevFormValue, wroteTo: selectedValue,}
       ))
   }
 
   // NEW LETTER ADD
   const addHandler = (event) => {
     event.preventDefault();
-    const newLetter = {id: uuid(), userName: userName, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
+    const newLetter = {id: uuid(), userName: userName, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
     }
     console.log('입력값으로 만들어진 객체',newLetter);
-    setLetters([...letters, newLetter]);
+    const userNameLength = userName.trim().length;
+    const messageLength = message.trim().length;
 
-    // input box init
-    setUserName("");
-    setMessage("");
+    // validation check
+    if (userNameLength === 0 || messageLength === 0) {
+      alert("Please fill out the blank");
+      return;
+    } else if (userNameLength > 20) { 
+      alert("Please write your usernmae within 20 characters.");
+      return;
+    } else if (messageLength > 100) {
+      alert("Please write your message within 100 characters.");
+      return;
+    } else if (/^\s*$/.test(userName) || /^\s*$/.test(message)) {
+      alert("Only spaces have been entered.");
+      return;
+    } else {
+      setLetters([...letters, newLetter]);
+      // input box init
+        setUserName("");
+        setMessage("");
+    }
   }
 
-
-
- 
-  
 
   return (
     <HeaderArea>
       <h1>Letters To Your Character</h1>
       <p>Send a letter to one of characters that Timothée Chalamet's played in roles!</p>
-      <form onSubmit={addHandler}>
+      <Form onSubmit={addHandler}>
         To...
         {/* name은 옵션값의 Key 명이 될 이름이다. */}
         <select name="wroteTo" value={letters.wroteTo}  onChange={selectHandler}>
@@ -86,10 +109,10 @@ function Header({letters, setLetters}) {
           <option value="Gatsby">Gatsby</option>
           <option value="Lee">Lee</option>
         </select>
-        username: <input type="text" value={userName} onChange={userNameHandler}/>
-        message: <input type="text" value={message} onChange={messageTypeHandler}/>
+        username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'ref={userNameRef}/>
+        message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
         <button type="submit">Send</button>
-      </form>
+      </Form>
     </HeaderArea>
   )
 }

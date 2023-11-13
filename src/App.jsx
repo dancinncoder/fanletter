@@ -1,9 +1,13 @@
 
 // CSS
 import { styled } from 'styled-components';
+import GlobalStyle from './GlobalStyle';
 // Hooks
-import {useState} from 'react';
+import { useState } from 'react';
 import uuid from 'react-uuid';
+import moment from 'moment';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 // Components
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -16,34 +20,51 @@ const Display = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 60px;
 `;
 
 const ImgBtnBox = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 60px;
 `;
 
-function App() {
 
+
+function App() {
+  const [paulLetterShown, setPaulLetterShown] = useState(true);
+  const [elioLetterShown, setElioLetterShown] = useState(true);
+  const [gatsbyLetterShown, setGatsbyLetterShown] = useState(true);
+  const [leeLetterShown, setLeeLetterShown] = useState(true);
+  const [createdAt, setCreatedAt] = useState("");
+  // const [activatedBtn,setActivatedBtn] = useState(true);
+  // // const changeBtnColor = () => {
+
+  // // }
+
+  // const btnActivateHandler = () => {
+  //   const activated = 
+  //   changeBtnColor();
+  // }
 
 
   const [letters, setLetters] = useState(
     [
-      {id: uuid(), userName: "Hamin", createdAt: "23.11.03 오전 11:07:09", message:"I love you Paul!", wroteTo: "Paul", character:"Paul", }
+      {id: uuid(), userName: "Hamin", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Paul!", wroteTo: "Paul", }
       ,
-      {id: uuid(), userName: "Rose", createdAt: "23.11.03 오전 11:07:09", message:"I like you Paul!", wroteTo: "Paul", character:"Paul"}
+      {id: uuid(), userName: "Rose", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Paul!", wroteTo: "Paul", }
       ,
-      {id: uuid(), userName: "Guigui", createdAt: "23.11.03 오전 11:07:09", message:"I love you Elio!", wroteTo: "Elio", character:"Elio"}
+      {id: uuid(), userName: "Guigui", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Elio!", wroteTo: "Elio", }
       ,
-      {id: uuid(), userName: "Tom", createdAt: "23.11.03 오전 11:07:09", message:"I like you Elio!", wroteTo: "Elio", character:"Elio"}
+      {id: uuid(), userName: "Tom", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Elio!", wroteTo: "Elio", }
       ,
-      {id: uuid(), userName: "Mark", createdAt: "23.11.03 오전 11:07:09", message:"I love you Gatsby!", wroteTo: "Gatsby", character:"Gatsby"}
+      {id: uuid(), userName: "Mark", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Gatsby!", wroteTo: "Gatsby", }
       ,
-      {id: uuid(), userName: "Sandra", createdAt: "23.11.03 오전 11:07:09", message:"I like you Gatsby!", wroteTo: "Gatsby", character:"Gatsby"}
+      {id: uuid(), userName: "Sandra", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Gatsby!", wroteTo: "Gatsby", }
       ,
-      {id: uuid(), userName: "Yuri", createdAt: "23.11.03 오전 11:07:09", message:"I love you Lee!", wroteTo: "Lee", character:"Lee"}
+      {id: uuid(), userName: "Yuri", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Lee!", wroteTo: "Lee", }
       ,
-      {id: uuid(), userName: "Vik", createdAt: "23.11.03 오전 11:07:09", message:"I like you Lee!", wroteTo: "Lee", character:"Lee", }
+      {id: uuid(), userName: "Vik", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Lee!", wroteTo: "Lee", }
       ,
     ]
   );
@@ -60,16 +81,28 @@ function App() {
   //   ]
   // );
 
+  const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  console.log(nowTime);
 
-  const [paulLetterShown, setPaulLetterShown] = useState(true);
-  const [elioLetterShown, setElioLetterShown] = useState(true);
-  const [gatsbyLetterShown, setGatsbyLetterShown] = useState(true);
-  const [leeLetterShown, setLeeLetterShown] = useState(true);
+  useEffect(()=> {
+    // GET CURRNET DATE & TIME
+    const now = moment();
 
+    // FORMATTING
+    const formattedTime = now.format('YY-MM-DD HH:mm:');
+
+    setCreatedAt(formattedTime);
+  })
+
+  const userNameRef = useRef('');
+  useEffect(()=> {
+    userNameRef.current.focus();
+  })
 
   return (
     <div>
-      <Header letters={letters} setLetters={setLetters}/>
+      <GlobalStyle />
+      <Header letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
       <main>
         <Display>
           <ImgBtnBox>

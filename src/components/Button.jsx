@@ -13,7 +13,6 @@ const ButtonBox = styled.div`
 const ButtonI = styled.button`
   width: 100px;
   height: 50px;
-  background-color: white;
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid black;
@@ -23,11 +22,19 @@ const ButtonI = styled.button`
     background-color: black;
     color: white;
   }
+  background-color: white;
 `;
 
+// background-color: ${setPaulButtonActivated ? 'black' : 'white'};
+// color: ${props => props.ButtonActivated ? 'white' : 'black'};
 
 function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, setLeeLetterShown})
 {
+
+  // const [paulButtonActivated, setPaulButtonActivated] = useState(true);
+  // const [elioButtonActivated, setElioButtonActivated] = useState(false);
+  // const [gatsbyButtonActivated, setGatsbyButtonActivated] = useState(false);
+  // const [leeButtonActivated, setLeeButtonActivated] = useState(false);
 
   const [buttonText, setButtonText] = useState(
     [
@@ -40,6 +47,11 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
 
   // 첫화면에 paul 버튼 활성화 세팅
   useEffect(()=> {
+      // setPaulButtonActivated(true);
+      // setElioButtonActivated(false);
+      // setGatsbyButtonActivated(false);
+      // setLeeButtonActivated(false);
+
       setPaulLetterShown(true);
       setElioLetterShown(false);
       setGatsbyLetterShown(false);
@@ -49,24 +61,44 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
   const buttonByNameClickHandler = (item) => {
     switch (item.name) {
       case 'Paul':
+        // setPaulButtonActivated(true);
+        // setElioButtonActivated(false);
+        // setGatsbyButtonActivated(false);
+        // setLeeButtonActivated(false);
+
         setPaulLetterShown(true);
         setElioLetterShown(false);
         setGatsbyLetterShown(false);
         setLeeLetterShown(false);
         break;
       case 'Elio':
+        // setPaulButtonActivated(false);
+        // setElioButtonActivated(true);
+        // setGatsbyButtonActivated(false);
+        // setLeeButtonActivated(false);
+
         setElioLetterShown(true);
         setPaulLetterShown(false);
         setGatsbyLetterShown(false);
         setLeeLetterShown(false);
         break;
       case 'Gatsby':
+        // setPaulButtonActivated(false);
+        // setElioButtonActivated(false);
+        // setGatsbyButtonActivated(true);
+        // setLeeButtonActivated(false);
+
         setGatsbyLetterShown(true);
         setElioLetterShown(false);
         setPaulLetterShown(false);
         setLeeLetterShown(false);
         break;
       case 'Lee':
+        // setPaulButtonActivated(false);
+        // setElioButtonActivated(false);
+        // setGatsbyButtonActivated(false);
+        // setLeeButtonActivated(true);
+
         setLeeLetterShown(true);
         setGatsbyLetterShown(false);
         setElioLetterShown(false);
