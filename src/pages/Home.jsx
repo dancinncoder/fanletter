@@ -40,9 +40,6 @@ function Home() {
     'Gatsby' : false,
     'Lee' : false,
   });
-  // const [elioLetterShown, setElioLetterShown] = useState(true);
-  // const [gatsbyLetterShown, setGatsbyLetterShown] = useState(true);
-  // const [leeLetterShown, setLeeLetterShown] = useState(true);
   const [createdAt, setCreatedAt] = useState("");
   const [letters, setLetters] = useState(
     [
@@ -114,18 +111,6 @@ function Home() {
             // letter wroteTo 이름으로
             return letterShown[letter.wroteTo];  
           })}/>
-          {/* {paulLetterShown && (
-            <List letters={letters.filter((letter) => letter.wroteTo === 'Paul')} setLetters={setLetters}/>
-          )}
-          {elioLetterShown && (
-            <List letters={letters.filter((letter) => letter.wroteTo === 'Elio')} setLetters={setLetters}/>
-          )}
-          {gatsbyLetterShown && (
-            <List letters={letters.filter((letter) => letter.wroteTo === 'Gatsby')} setLetters={setLetters}/>
-          )}
-          {leeLetterShown && (
-            <List letters={letters.filter((letter) => letter.wroteTo === 'Lee')} setLetters={setLetters}/>
-          )} */}
         </Display>
       </main>
       <Footer />

@@ -39,14 +39,6 @@ function Button({setLetterShown})
     ]
   );
 
-  // 첫화면에 paul 버튼과 paul letters 활성화 세팅
-  // useEffect(()=> {
-  //     setPaulLetterShown(true);
-  //     setElioLetterShown(false);
-  //     setGatsbyLetterShown(false);
-  //     setLeeLetterShown(false);
-  //   }, []);
-
   const buttonByNameClickHandler = (item) => {
     SetSelectedCharacterId(item.id);
     const allFalse = 
