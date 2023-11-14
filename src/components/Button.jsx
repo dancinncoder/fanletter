@@ -22,19 +22,14 @@ const ButtonI = styled.button`
     background-color: black;
     color: white;
   }
-  background-color: white;
 `;
-
+// background-color: ${selectedCharacterId === buttonText.id ? 'black' : 'white'};
 // background-color: ${setPaulButtonActivated ? 'black' : 'white'};
 // color: ${props => props.ButtonActivated ? 'white' : 'black'};
 
 function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, setLeeLetterShown})
 {
-
-  // const [paulButtonActivated, setPaulButtonActivated] = useState(true);
-  // const [elioButtonActivated, setElioButtonActivated] = useState(false);
-  // const [gatsbyButtonActivated, setGatsbyButtonActivated] = useState(false);
-  // const [leeButtonActivated, setLeeButtonActivated] = useState(false);
+  const [selectedCharacterId, SetSelectedCharacterId] = useState(1);
 
   const [buttonText, setButtonText] = useState(
     [
@@ -59,46 +54,27 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
     }, []);
 
   const buttonByNameClickHandler = (item) => {
+    SetSelectedCharacterId(item.id);
     switch (item.name) {
       case 'Paul':
-        // setPaulButtonActivated(true);
-        // setElioButtonActivated(false);
-        // setGatsbyButtonActivated(false);
-        // setLeeButtonActivated(false);
-
         setPaulLetterShown(true);
         setElioLetterShown(false);
         setGatsbyLetterShown(false);
         setLeeLetterShown(false);
         break;
       case 'Elio':
-        // setPaulButtonActivated(false);
-        // setElioButtonActivated(true);
-        // setGatsbyButtonActivated(false);
-        // setLeeButtonActivated(false);
-
         setElioLetterShown(true);
         setPaulLetterShown(false);
         setGatsbyLetterShown(false);
         setLeeLetterShown(false);
         break;
       case 'Gatsby':
-        // setPaulButtonActivated(false);
-        // setElioButtonActivated(false);
-        // setGatsbyButtonActivated(true);
-        // setLeeButtonActivated(false);
-
         setGatsbyLetterShown(true);
         setElioLetterShown(false);
         setPaulLetterShown(false);
         setLeeLetterShown(false);
         break;
       case 'Lee':
-        // setPaulButtonActivated(false);
-        // setElioButtonActivated(false);
-        // setGatsbyButtonActivated(false);
-        // setLeeButtonActivated(true);
-
         setLeeLetterShown(true);
         setGatsbyLetterShown(false);
         setElioLetterShown(false);
@@ -114,7 +90,10 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
     <ButtonBox>
       {buttonText.map((item)=>{
         return(
-          <ButtonI key={item.id} onClick={()=> buttonByNameClickHandler(item)}>{item.name}</ButtonI>
+          <ButtonI key={item.id} onClick={()=> buttonByNameClickHandler(item) } style={{
+            backgroundColor: selectedCharacterId === item.id ? "black" : "white",
+            color: selectedCharacterId === item.id ? "white" : "black",
+          }}>{item.name}</ButtonI>
         );
       })}
     </ButtonBox>
