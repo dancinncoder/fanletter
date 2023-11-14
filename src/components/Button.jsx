@@ -26,7 +26,7 @@ const ButtonI = styled.button`
   color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'black')};
 `;
 
-function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, setLeeLetterShown})
+function Button({setLetterShown})
 {
   const [selectedCharacterId, SetSelectedCharacterId] = useState(1);
 
@@ -40,43 +40,23 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
   );
 
   // 첫화면에 paul 버튼과 paul letters 활성화 세팅
-  useEffect(()=> {
-      setPaulLetterShown(true);
-      setElioLetterShown(false);
-      setGatsbyLetterShown(false);
-      setLeeLetterShown(false);
-    }, []);
+  // useEffect(()=> {
+  //     setPaulLetterShown(true);
+  //     setElioLetterShown(false);
+  //     setGatsbyLetterShown(false);
+  //     setLeeLetterShown(false);
+  //   }, []);
 
   const buttonByNameClickHandler = (item) => {
     SetSelectedCharacterId(item.id);
-    switch (item.name) {
-      case 'Paul':
-        setPaulLetterShown(true);
-        setElioLetterShown(false);
-        setGatsbyLetterShown(false);
-        setLeeLetterShown(false);
-        break;
-      case 'Elio':
-        setElioLetterShown(true);
-        setPaulLetterShown(false);
-        setGatsbyLetterShown(false);
-        setLeeLetterShown(false);
-        break;
-      case 'Gatsby':
-        setGatsbyLetterShown(true);
-        setElioLetterShown(false);
-        setPaulLetterShown(false);
-        setLeeLetterShown(false);
-        break;
-      case 'Lee':
-        setLeeLetterShown(true);
-        setGatsbyLetterShown(false);
-        setElioLetterShown(false);
-        setPaulLetterShown(false);
-        break;
-      default:
-        break;
-    }
+    const allFalse = 
+    {
+      'Paul' : false,
+      'Elio' : false,
+      'Gatsby' : false,
+      'Lee' : false,
+    };
+    setLetterShown({ ...allFalse, [item.name] : true});
   }
 
 

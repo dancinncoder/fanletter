@@ -3,6 +3,7 @@ import {styled} from "styled-components";
 import uuid from 'react-uuid';
 import userIcon from '../assets/user-icon.png';
 
+
 const ListArea = styled.div`
   border: 1px solid black;
   width: 450px;
