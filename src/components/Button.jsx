@@ -22,10 +22,9 @@ const ButtonI = styled.button`
     background-color: black;
     color: white;
   }
+  background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'black' : 'white')};
+  color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'black')};
 `;
-// background-color: ${selectedCharacterId === buttonText.id ? 'black' : 'white'};
-// background-color: ${setPaulButtonActivated ? 'black' : 'white'};
-// color: ${props => props.ButtonActivated ? 'white' : 'black'};
 
 function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, setLeeLetterShown})
 {
@@ -40,13 +39,8 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
     ]
   );
 
-  // 첫화면에 paul 버튼 활성화 세팅
+  // 첫화면에 paul 버튼과 paul letters 활성화 세팅
   useEffect(()=> {
-      // setPaulButtonActivated(true);
-      // setElioButtonActivated(false);
-      // setGatsbyButtonActivated(false);
-      // setLeeButtonActivated(false);
-
       setPaulLetterShown(true);
       setElioLetterShown(false);
       setGatsbyLetterShown(false);
@@ -90,10 +84,7 @@ function Button({setPaulLetterShown,setElioLetterShown,  setGatsbyLetterShown, s
     <ButtonBox>
       {buttonText.map((item)=>{
         return(
-          <ButtonI key={item.id} onClick={()=> buttonByNameClickHandler(item) } style={{
-            backgroundColor: selectedCharacterId === item.id ? "black" : "white",
-            color: selectedCharacterId === item.id ? "white" : "black",
-          }}>{item.name}</ButtonI>
+          <ButtonI key={item.id} onClick={()=> buttonByNameClickHandler(item) } selectedCharacterId={selectedCharacterId} buttonId={item.id}>{item.name}</ButtonI>
         );
       })}
     </ButtonBox>
