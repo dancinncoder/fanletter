@@ -50,7 +50,14 @@ function List({letters, setLetters}) {
     <ListArea>
       {letters.map((letter)=>{
         return(
-          <Letter key={uuid()} to={`/letter-details/${letter.id}`}>
+          <Letter
+            key={uuid()}
+            to={`/letter-details/${letter.id}`}
+            state={{userName : letter.userName
+            , createdAt : letter.createdAt
+            , wroteTo : letter.wroteTo
+            , message : letter.message
+            }}>
             <UserIcon src={userIcon} alt="User Icon"/>
             <div>
               <h3>{letter.userName}</h3>
