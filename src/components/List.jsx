@@ -6,11 +6,35 @@ import UserIcon from './UserIcon';
 
 
 const ListArea = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black;
   width: 450px;
   height: 400px;
-  margin: 50px 25px 50px 25px;
+  margin: 50px 25px 50px 25px; */
   overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* border-radius: 20px; */
+  width: 90%;
+  height: 300px;
+  margin: 10px;
+  background-color: #f2f2f2;
+  color: #000000;
+  padding: 10px;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    padding-right: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 10px solid white;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
 `;
 
 const Letter = styled(Link)`
@@ -20,10 +44,12 @@ const Letter = styled(Link)`
   align-items: center;
   color: black;
   background-color: #e9e9e9;
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
   gap: 5px;
   height: 150px;
+  width: 90%;
+  /* border-radius: 20px; */
   cursor: pointer;
   text-decoration: none;
   transition: 0.3s ease;
@@ -58,9 +84,24 @@ const UserName = styled.h3`
   font-weight: 800;
 `;
 
+const ListOuterFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 20px; */
+  width: 90%;
+  height: 400px;
+  border-radius: 20px;
+  margin: 20px;
+  background-color: #f2f2f2;
+  padding: 10px;
+`;
+
 function List({letters, setLetters}) {
   return (
-    <ListArea>
+    <ListOuterFrame>
+      <ListArea>
       {letters.map((letter)=>{
         return(
           <Letter
@@ -81,7 +122,9 @@ function List({letters, setLetters}) {
           </Letter>
         );
       })}
-    </ListArea>
+      </ListArea>
+    </ListOuterFrame>
+
   )
 }
 

@@ -13,6 +13,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
+import FormArea from '../components/FormArea';
 // import Image from '../components/Image';
 // Image
 import picturePaul from '../assets/dune-Paul.png';
@@ -22,6 +23,9 @@ const OuterFrame = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #272727;
+  margin: 0;
+  padding: 0;
 `;
 
 
@@ -31,7 +35,11 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   gap: 60px;
-
+  /* width: 100%; */
+  max-width: 100%;
+  height: 100vh;
+  /* border: 1px solid red; */
+  margin: 0;
 `;
 
 const ImgBtnBox = styled.div`
@@ -41,7 +49,29 @@ const ImgBtnBox = styled.div`
 `;
 
 const PicturePaul = styled.img`
-  width: 430px;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width:90%;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+  transform: scale(1.04);
+  }
+`;
+
+const LetterInputOutputArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid yellow; */
+  margin-top: 0;
+  width: 100%;
+  &:nth-child(2) {
+    color: white;
+  }
 `;
 
 function Home() {
@@ -82,12 +112,16 @@ function Home() {
       <Main>
         <ImgBtnBox>
           <PicturePaul src={picturePaul} alt="Paul picture"/>
-          {/* <Image /> */}
-          <Button setLetterShown={setLetterShown} letters={letters}/>
         </ImgBtnBox>
-        <List letters={letters.filter((letter)=>{
-          return letterShown[letter.wroteTo];  
-        })}/>
+        <LetterInputOutputArea>
+          <h1>Send My Letter</h1>
+          <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
+          <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
+          <List letters={letters.filter((letter)=>{
+            return letterShown[letter.wroteTo];  
+          })}/>
+        </LetterInputOutputArea>
+        <Button setLetterShown={setLetterShown} letters={letters}/>
       </Main>
       <Footer />
     </OuterFrame>

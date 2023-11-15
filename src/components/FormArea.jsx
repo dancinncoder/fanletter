@@ -8,32 +8,66 @@ import moment from 'moment';
 
 const Form = styled.form`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  /* align-items: center; */
   justify-content: center;
   gap: 10px;
   font-size: 1rem;
   font-weight: 600;
+  color: #000000;
+  //아래가 후
+  width: 90%;
+  height: 120px;
+  border-radius: 20px;
+  margin: 20px;
+  background-color: #f2f2f2;
+  padding: 10px;
 `;
 
 const MessageInput = styled.input`
-  width: 180px;
+  width: 90%;
+  border: none;
 `;
 
 const UserNameInput = styled.input`
-  width: 110px;
+  width: 100%;
+  border: none;
 `;
 
 const SendButton = styled.button`
   background-color: white;
   border: 1px solid black;
+  height: 40px;
+  width: 100%;
+  border: none;
   cursor: pointer;
+  border-radius: 20px;
   transition: 0.2s ease;
   &:hover {
     background-color: black;
     color: white;
     transform: scale(1.004);
   }
+`;
+
+const ToUserName = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 85%;
+  gap: 10px;
+  height: 20px;
+  margin: 2px 20px 2px 20px;
+  /* border: 1px solid red; */
+`;
+
+const MessageBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+  margin: 2px 20px 2px 20px;
 `;
 
 function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
@@ -104,16 +138,20 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
 
   return (
     <Form onSubmit={addHandler}>
-    To...
-    {/* name은 옵션값의 Key 명이 될 이름이다. */}
-    <select name="wroteTo" value={letters.wroteTo}  onChange={selectHandler}>
-      <option value="Paul">Paul</option>
-      <option value="Elio">Elio</option>
-      <option value="Gatsby">Gatsby</option>
-      <option value="Lee">Lee</option>
-    </select>
-    username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'ref={userNameRef}/>
-    message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
+      <ToUserName>
+        {/* name은 옵션값의 Key 명이 될 이름이다. */}
+        To...<select name="wroteTo" value={letters.wroteTo}  onChange={selectHandler}>
+          <option value="Paul">Paul</option>
+          <option value="Elio">Elio</option>
+          <option value="Gatsby">Gatsby</option>
+          <option value="Lee">Lee</option>
+        </select>
+        username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'ref={userNameRef}/>
+      </ToUserName>
+      <MessageBox>
+        message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
+      </MessageBox>
+
     <SendButton type="submit">Send</SendButton>
   </Form>
   )

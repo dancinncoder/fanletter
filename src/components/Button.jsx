@@ -10,21 +10,57 @@ const ButtonBox = styled.div`
 `;
 
 const ButtonI = styled.button`
-  width: 100px;
-  height: 50px;
+  /* width: 100px;
+  height: 50px; */
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid black;
   transition: 0.06s ease;
   cursor: pointer;
+
+  width: 200px;
+  height: 100px;
+  background-color: black;
+
+  width: 15%;
+  height: 100px;
+  background-color: black;
+  color: white;
+  font-size: 1.3rem;
+  border: none;
+  display: block;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
   &:hover {
-    background-color: black;
-    border: none;
+    background-color: #343434;
     color: white;
-    transform: scale(1.03);
   }
-  background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'black' : 'white')};
-  color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'black')};
+  &:first-child {
+    bottom: 55%;
+  }
+  &:nth-child(2){
+    bottom: 43%;
+  }
+  &:nth-child(3){
+    bottom: 31%;
+  }
+  &:nth-child(4){
+    bottom: 19%;
+  }
+
+  /* &:hover {
+    background-color: night-rider;
+    border: none;
+    color:white;
+    transform: scale(1.03);
+  } */
+  background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? '#343434' : 'black')};
+  color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'white')};
+
+
+
 `;
 
 function Button({setLetterShown})
