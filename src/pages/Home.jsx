@@ -1,23 +1,22 @@
-
-// CSS
-import { styled } from 'styled-components';
-import GlobalStyle from '../GlobalStyle';
 // Hooks
 import React from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+// CSS
+import { styled } from 'styled-components';
+import GlobalStyle from '../GlobalStyle';
 // Components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
 // import Image from '../components/Image';
-// img
+// Image
 import picturePaul from '../assets/dune-Paul.png';
-// Data fetch
-import fakeData from "../database/fakeData.json";
+// Data Fetch
+// import fakeData from "../database/fakeData.json";
 
 
 
@@ -50,41 +49,13 @@ function Home() {
   const [createdAt, setCreatedAt] = useState("");
 
   // fakeData 가져오기
-  const [letters, setLetters] = useState(
-    fakeData
-  );
+  // const [letters, setLetters] = useState(fakeData);
 
-  // useEffect(()=>{
-  //   const fakeData = require("fakeData");
-  //   setLetters([...fakeData]);
-  // },[])
-
-
-  // const [letters, setLetters] = useState(
-  //   [
-  //     {id: uuid(), userName: "Hamin", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Paul!", wroteTo: "Paul", }
-  //     ,
-  //     {id: uuid(), userName: "Rose", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Paul!", wroteTo: "Paul", }
-  //     ,
-  //     {id: uuid(), userName: "Guigui", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Elio!", wroteTo: "Elio", }
-  //     ,
-  //     {id: uuid(), userName: "Tom", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Elio!", wroteTo: "Elio", }
-  //     ,
-  //     {id: uuid(), userName: "Mark", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Gatsby!", wroteTo: "Gatsby", }
-  //     ,
-  //     {id: uuid(), userName: "Sandra", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Gatsby!", wroteTo: "Gatsby", }
-  //     ,
-  //     {id: uuid(), userName: "Yuri", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Lee!", wroteTo: "Lee", }
-  //     ,
-  //     {id: uuid(), userName: "Vik", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Lee!", wroteTo: "Lee", }
-  //     ,
-  //   ]
-  // );
-
- 
-
-
-
+  const [letters, setLetters] = useState([]);
+  useEffect(()=>{
+    const lettersData = require("../database/fakeData.json");
+    setLetters(lettersData);
+  },[])
 
   const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
   console.log(nowTime);
