@@ -12,11 +12,12 @@ const Letter = styled.div`
   align-items: center;
   border: none;
   border-radius: 20px;
-  width: 700px;
+  width: 33%;
   height: 400px;
   margin: 0 150px 80px 150px;
   background-color: #f2f2f2;
   color: #000000;
+  padding: 10px 50px 10px 50px;
 `;
 
 const Header = styled.div`
@@ -46,18 +47,21 @@ const GoHomeBtn = styled.button`
   margin: 10px;
   border: none;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.1s ease-in;
   &:hover {
-    font-size: 1.28rem;
+    transform: scale(1.03);
+    color: #e49090;
   }
 `;
 
 const GoHomeBtn2 = styled.img`
-  height: 90vh;
+  /* height: 90vh; */
+  /* max-height: 90%; */
   display: block;
   position: absolute;
   left: 0;
   bottom: 0;
+  max-width:99%;
   transition: 0.2s ease;
   cursor: pointer;
   &:hover {
@@ -70,10 +74,10 @@ const BtnArea = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 450px;
+  width: 30%;
   height: 90%;
   overflow-y: hidden;
-  z-index: 0;
+  /* z-index: 0; */
 `;
 
 const EditBtnArea = styled.div`
@@ -85,7 +89,7 @@ const EditBtnArea = styled.div`
 `;
 
 const Button = styled.button`
-  width: 280px;
+  width: 15%;
   height: 100px;
   background-color: black;
   color: white;
@@ -116,9 +120,10 @@ const UserNameAndCreatedAt = styled.div`
   align-items: center;
   justify-content: space-between;
   justify-self: flex-start;
+  padding-right: 15px;
   gap: 20px;
-  width: 600px;
-  padding: 0 30px 0 0;
+  width: 103%;
+  /* border: 1px solid red; */
 `;
 
 const UserInfo = styled.div`
@@ -138,20 +143,24 @@ const CreatedAt = styled.p`
 
 const WroteTo = styled.p`
   align-self: flex-start;
-  width: 560px;
-  padding: 0 20px 5px 20px;
-  margin: 0 50px 0 40px;
+  width: 80%;
+  padding: 0 5px 5px 5px;
+  /* margin: 0 50px 0 40px; */
+  margin: 0 5px 5px 5px;
   font-size: 1.2rem;
   font-weight: 700;
   color: #e49090;
+  /* border: 1px solid blue; */
 `;
 
 const Message = styled.p`
   align-self: flex-start;
-  width: 560px;
+  /* width: 560px; */
+  width: 93%;
   height: 150px;
   padding: 20px 20px 5px 20px;
-  margin: 10px 50px 0 50px;
+  /* margin: 10px 50px 0 50px; */
+  margin: 0;
   font-size: 1.2rem;
   font-weight: 500;
   background-color: #e5e3e3;
