@@ -4,6 +4,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
 // CSS
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
@@ -20,7 +21,7 @@ import picturePaul from '../assets/dune-Paul.png';
 
 
 
-const Display = styled.div`
+const Main = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -73,25 +74,21 @@ function Home() {
     userNameRef.current.focus();
   })
 
+
   return (
     <div>
       <GlobalStyle />
       <Header letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
-      <main>
-        <Display>
-          <ImgBtnBox>
-            <PicturePaul src={picturePaul} alt="Paul picture"/>
-            {/* <Image /> */}
-            <Button
-              setLetterShown={setLetterShown}
-              letters={letters}
-            />
-          </ImgBtnBox>
-          <List letters={letters.filter((letter)=>{
-            return letterShown[letter.wroteTo];  
-          })}/>
-        </Display>
-      </main>
+      <Main>
+        <ImgBtnBox>
+          <PicturePaul src={picturePaul} alt="Paul picture"/>
+          {/* <Image /> */}
+          <Button setLetterShown={setLetterShown} letters={letters}/>
+        </ImgBtnBox>
+        <List letters={letters.filter((letter)=>{
+          return letterShown[letter.wroteTo];  
+        })}/>
+      </Main>
       <Footer />
     </div>
   );

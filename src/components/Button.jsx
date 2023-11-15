@@ -15,11 +15,13 @@ const ButtonI = styled.button`
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid black;
-  transition: 0.2s ease;
+  transition: 0.06s ease;
   cursor: pointer;
   &:hover {
     background-color: black;
+    border: none;
     color: white;
+    transform: scale(1.03);
   }
   background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'black' : 'white')};
   color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'black')};

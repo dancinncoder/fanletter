@@ -2,6 +2,7 @@ import React from 'react'
 import {styled} from "styled-components";
 import uuid from 'react-uuid';
 import userIcon from '../assets/user-icon.png';
+import { Link, useParams } from 'react-router-dom';
 
 
 const ListArea = styled.div`
@@ -12,16 +13,24 @@ const ListArea = styled.div`
   overflow-y: scroll;
 `;
 
-const Letter = styled.div`
+const Letter = styled(Link)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  color: black;
   background-color: #e9e9e9;
   margin: 20px;
   padding: 10px;
   gap: 5px;
   height: 180px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s ease;
+  &:hover {
+    transform: scale(1.02);
+    background-color: #acacac;
+  }
 `;
 
 const Message = styled.span`
@@ -41,7 +50,7 @@ function List({letters, setLetters}) {
     <ListArea>
       {letters.map((letter)=>{
         return(
-          <Letter key={uuid()}>
+          <Letter key={uuid()} to={`/letter-details/${letter.id}`}>
             <UserIcon src={userIcon} alt="User Icon"/>
             <div>
               <h3>{letter.userName}</h3>
