@@ -12,7 +12,8 @@ const HeaderArea = styled.header`
   justify-content: center;
   align-items: center;
   height: 200px;
-  border: 1px solid black;
+  width: 1300px;
+  border-bottom: 1px solid black;
 `;
 
 function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {

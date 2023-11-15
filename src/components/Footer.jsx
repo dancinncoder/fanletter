@@ -9,7 +9,8 @@ const FooterArea = styled.footer`
   align-items: center;
   background-color: black;
   color: white;
-  height: 150px;
+  height: 20vh;
+  width: 100vw;
   margin: 0 0 0 0;
 `;
 

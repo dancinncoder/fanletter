@@ -16,7 +16,7 @@ const ListArea = styled.div`
 const Letter = styled(Link)`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   color: black;
   background-color: #e9e9e9;
@@ -45,6 +45,20 @@ const UserIcon = styled.img`
   width: 50px;
 `;
 
+const LetterContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  border: 1px solid red;
+`;
+
+const UserName = styled.h3`
+  margin: 0;
+  padding: 0;
+  font-weight: 800;
+`;
+
 function List({letters, setLetters}) {
   return (
     <ListArea>
@@ -57,15 +71,14 @@ function List({letters, setLetters}) {
             , createdAt : letter.createdAt
             , wroteTo : letter.wroteTo
             , message : letter.message
-            }}>
+          }}>
             <UserIcon src={userIcon} alt="User Icon"/>
-            <div>
-              <h3>{letter.userName}</h3>
+            <LetterContent>
+              <UserName>{letter.userName}</UserName>
               <p>{letter.createdAt}</p>
               <span>To...{letter.wroteTo},&nbsp;</span>
               <Message>{letter.message}</Message>
-              <p>{uuid()}</p>
-            </div>
+            </LetterContent>
           </Letter>
         );
       })}

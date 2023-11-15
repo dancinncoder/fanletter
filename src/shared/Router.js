@@ -7,7 +7,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="Home/" element={<Home />}/>
         {/* <Route path="letter-details" element={<LetterDetails />}/> */}
         <Route path="letter-details/:id" element={<LetterDetails />}/>
       </Routes>
