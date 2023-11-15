@@ -1,8 +1,8 @@
 import React from 'react'
 import {styled} from "styled-components";
 import uuid from 'react-uuid';
-import userIcon from '../assets/user-icon.png';
 import { Link, useParams } from 'react-router-dom';
+import UserIcon from './UserIcon';
 
 
 const ListArea = styled.div`
@@ -23,7 +23,7 @@ const Letter = styled(Link)`
   margin: 20px;
   padding: 10px;
   gap: 5px;
-  height: 180px;
+  height: 150px;
   cursor: pointer;
   text-decoration: none;
   transition: 0.3s ease;
@@ -39,18 +39,17 @@ const Message = styled.span`
   text-overflow: ellipsis;  
 `;
 
-const UserIcon = styled.img`
-  align-self: start;
-  margin: 20px;
-  width: 50px;
-`;
+// const UserIconImg = styled.img`
+//   align-self: start;
+//   margin: 20px;
+//   width: 50px;
+// `;
 
 const LetterContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 300px;
-  border: 1px solid red;
+  width: 260px;
 `;
 
 const UserName = styled.h3`
@@ -72,11 +71,11 @@ function List({letters, setLetters}) {
             , wroteTo : letter.wroteTo
             , message : letter.message
           }}>
-            <UserIcon src={userIcon} alt="User Icon"/>
+            <UserIcon />
             <LetterContent>
               <UserName>{letter.userName}</UserName>
               <p>{letter.createdAt}</p>
-              <span>To...{letter.wroteTo},&nbsp;</span>
+              <span>{letter.wroteTo},&nbsp;</span>
               <Message>{letter.message}</Message>
             </LetterContent>
           </Letter>

@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
 import goHomeBtn2 from '../assets/gohome-icon2.png';
-import userIcon from '../assets/user-icon.png';
+import UserIcon from '../components/UserIcon';
 
 const Letter = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ const EditBtnArea = styled.div`
 `;
 
 const Button = styled.button`
-  width: 200px;
+  width: 280px;
   height: 100px;
   background-color: black;
   color: white;
@@ -130,10 +130,7 @@ const UserInfo = styled.div`
   font-weight: 800;
 `;
 
-const UserIcon = styled.img`
-  margin: 20px;
-  width: 55px;
-`;
+
 
 const CreatedAt = styled.p`
   font-weight: 600;
@@ -177,16 +174,16 @@ function LetterDetails({}) {
     <div>
       <GlobalStyle />
       <Header>
-        <GoHomeBtn onClick={()=> {navigate("../Home")}}>Home</GoHomeBtn>
+        <GoHomeBtn onClick={()=> {navigate(-1)}}>Home</GoHomeBtn>
       </Header>
       <Main>
         <BtnArea>
-          <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate("../Home")}}></GoHomeBtn2>
+          <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>
         </BtnArea>
         <Letter>
           <UserNameAndCreatedAt>
             <UserInfo>
-              <UserIcon src={userIcon} alt="User Icon"/>
+              <UserIcon />
               <p>{userName}</p>
             </UserInfo>
             <CreatedAt>{createdAt}</CreatedAt>
@@ -195,9 +192,9 @@ function LetterDetails({}) {
           <Message>{message}</Message>
         </Letter>
         <EditBtnArea>
-          <Button>Edit</Button>
-          <Button>Delete</Button>
-          <Button>Back</Button>
+          <Button alt="Edit Button">Edit</Button>
+          <Button alt="Delete Button">Delete</Button>
+          <Button onClick={()=> {navigate(-1)}} alt="Back Button">Back</Button>
         </EditBtnArea>
       </Main>
 

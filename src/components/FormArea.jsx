@@ -12,6 +12,8 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
 `;
 
 const MessageInput = styled.input`
@@ -20,6 +22,18 @@ const MessageInput = styled.input`
 
 const UserNameInput = styled.input`
   width: 110px;
+`;
+
+const SendButton = styled.button`
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: 0.2s ease;
+  &:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.004);
+  }
 `;
 
 function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
@@ -81,6 +95,7 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
       return;
     } else {
       setLetters([...letters, newLetter]);
+      alert("Your letter has been successfully sent!");
       // input box init
         setUserName("");
         setMessage("");
@@ -99,7 +114,7 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
     </select>
     username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'ref={userNameRef}/>
     message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
-    <button type="submit">Send</button>
+    <SendButton type="submit">Send</SendButton>
   </Form>
   )
 }
