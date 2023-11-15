@@ -28,7 +28,7 @@ const ButtonI = styled.button`
 
 function Button({setLetterShown})
 {
-  const [selectedCharacterId, SetSelectedCharacterId] = useState(1);
+  const [selectedCharacterId, setSelectedCharacterId] = useState(1);
 
   const [buttonText, setButtonText] = useState(
     [
@@ -40,7 +40,7 @@ function Button({setLetterShown})
   );
 
   const buttonByNameClickHandler = (item) => {
-    SetSelectedCharacterId(item.id);
+    setSelectedCharacterId(item.id);
     const allFalse = 
     {
       'Paul' : false,
