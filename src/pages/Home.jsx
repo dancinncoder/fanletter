@@ -5,7 +5,6 @@ import GlobalStyle from '../GlobalStyle';
 // Hooks
 import React from 'react';
 import { useState } from 'react';
-import uuid from 'react-uuid';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useRef } from 'react';
@@ -17,6 +16,8 @@ import Button from '../components/Button';
 // import Image from '../components/Image';
 // img
 import picturePaul from '../assets/dune-Paul.png';
+// Data fetch
+import fakeData from "../database/fakeData.json";
 
 
 
@@ -47,38 +48,43 @@ function Home() {
     'Lee' : false,
   });
   const [createdAt, setCreatedAt] = useState("");
+
+  // fakeData 가져오기
   const [letters, setLetters] = useState(
-    [
-      {id: uuid(), userName: "Hamin", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Paul!", wroteTo: "Paul", }
-      ,
-      {id: uuid(), userName: "Rose", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Paul!", wroteTo: "Paul", }
-      ,
-      {id: uuid(), userName: "Guigui", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Elio!", wroteTo: "Elio", }
-      ,
-      {id: uuid(), userName: "Tom", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Elio!", wroteTo: "Elio", }
-      ,
-      {id: uuid(), userName: "Mark", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Gatsby!", wroteTo: "Gatsby", }
-      ,
-      {id: uuid(), userName: "Sandra", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Gatsby!", wroteTo: "Gatsby", }
-      ,
-      {id: uuid(), userName: "Yuri", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Lee!", wroteTo: "Lee", }
-      ,
-      {id: uuid(), userName: "Vik", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Lee!", wroteTo: "Lee", }
-      ,
-    ]
+    fakeData
   );
 
-  // const [characterImage, setCharacterImage] = useState(
+  // useEffect(()=>{
+  //   const fakeData = require("fakeData");
+  //   setLetters([...fakeData]);
+  // },[])
+
+
+  // const [letters, setLetters] = useState(
   //   [
-  //     {name: "Paul", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb2mdiC%2Fbtsz6vZ0AJC%2FMCCSeykgsK4zkmNrF4202k%2Fimg.png" }
+  //     {id: uuid(), userName: "Hamin", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Paul!", wroteTo: "Paul", }
   //     ,
-  //     {name: "Elio", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbn60w6%2Fbtsz90x9gn8%2FVoGmwVTKKQjF6G8HXrUmBk%2Fimg.png" }
+  //     {id: uuid(), userName: "Rose", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Paul!", wroteTo: "Paul", }
   //     ,
-  //     {name: "Gatsby", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fq7XpO%2FbtsAbaGGZzW%2FEib9Jr6RbEFCVFrKG8cLxK%2Fimg.png" }
+  //     {id: uuid(), userName: "Guigui", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Elio!", wroteTo: "Elio", }
   //     ,
-  //     {name: "Lee", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeRM5KX%2Fbtsz8sCdh3p%2FgI45Ou0kAMqrkAfDKtt9Z1%2Fimg.png" }
+  //     {id: uuid(), userName: "Tom", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Elio!", wroteTo: "Elio", }
+  //     ,
+  //     {id: uuid(), userName: "Mark", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Gatsby!", wroteTo: "Gatsby", }
+  //     ,
+  //     {id: uuid(), userName: "Sandra", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Gatsby!", wroteTo: "Gatsby", }
+  //     ,
+  //     {id: uuid(), userName: "Yuri", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I love you Lee!", wroteTo: "Lee", }
+  //     ,
+  //     {id: uuid(), userName: "Vik", createdAt: moment().format('YY-MM-DD HH:mm'), message:"I like you Lee!", wroteTo: "Lee", }
+  //     ,
   //   ]
   // );
+
+ 
+
+
+
 
   const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
   console.log(nowTime);
@@ -86,12 +92,10 @@ function Home() {
   useEffect(()=> {
     // GET CURRNET DATE & TIME
     const now = moment();
-
     // FORMATTING
     const formattedTime = now.format('YY-MM-DD HH:mm:');
-
     setCreatedAt(formattedTime);
-  })
+  },[])
 
   const userNameRef = useRef('');
   useEffect(()=> {
@@ -112,10 +116,7 @@ function Home() {
               letters={letters}
             />
           </ImgBtnBox>
-          {/* 여기서 이름별로 필터링 해야 하는데.. */}
           <List letters={letters.filter((letter)=>{
-            // letterShown 보여지는 것 객체형태 이름을 키값으로 선택되었는지의 유무를 알 수 있다.
-            // letter wroteTo 이름으로
             return letterShown[letter.wroteTo];  
           })}/>
         </Display>
