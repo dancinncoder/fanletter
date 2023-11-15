@@ -14,6 +14,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
+// import Image from '../components/Image';
+// img
+import picturePaul from '../assets/dune-Paul.png';
 
 
 
@@ -31,6 +34,9 @@ const ImgBtnBox = styled.div`
   gap: 60px;
 `;
 
+const PicturePaul = styled.img`
+  width: 430px;
+`;
 
 
 function Home() {
@@ -99,7 +105,8 @@ function Home() {
       <main>
         <Display>
           <ImgBtnBox>
-            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbhE6Im%2FbtsAaloxZcy%2FrKQ9RqtzUk3CVSvt7FLP81%2Fimg.jpg"/>
+            <PicturePaul src={picturePaul} alt="Paul picture"/>
+            {/* <Image /> */}
             <Button
               setLetterShown={setLetterShown}
               letters={letters}
