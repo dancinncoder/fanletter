@@ -13,7 +13,7 @@ function Router() {
     setLetters(lettersData);
   },[])
 
-  
+
   // const [letters, setLetters] = useState([
   //   {id: 1, userName: "Hamin", createdAt: "23-11-15 10:55", message:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ", wroteTo: "Paul" }
   //   ,
@@ -28,7 +28,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="Home/" element={<Home letters={letters} setLetters={setLetters}/>}/>
+        <Route path="/" element={<Home letters={letters} setLetters={setLetters}/>}/>
         {/* <Route path="letter-details" element={<LetterDetails />}/> */}
         <Route path="letter-details/:id" element={<LetterDetails letters={letters} setLetters={setLetters}/>}/>
       </Routes>

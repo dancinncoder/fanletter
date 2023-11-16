@@ -145,25 +145,31 @@ const Message = styled.p`
 function LetterDetails({letters, setLetters}) {
 
   const { id } = useParams();
-  const location = useLocation();
-  // const userName = location.state.userName;
-  // const createdAt = location.state.createdAt;
-  // const wroteTo = location.state.wroteTo;
-  // const message = location.state.message;
-  // const letters= location.state;
-  // const setLetters = useState(letters);
-  // const {letters, letter} = location.state;
-  console.log('????',location.state);
-  console.log('모음',location);
+  // const location = useLocation();
+  // console.log('????',location.state);
+  // console.log('모음',location);
   const navigate = useNavigate();
   let filtered = letters?.find((item)=>item.id === Number(id));
-  // console.log(filtered);
-  console.log('letters',letters);
-  console.log('usparams',id);
+  console.log('filtered',filtered);
+  // console.log('letters',letters);
+  // console.log('usparams',id);
 
   const deleteLetterHandler = (id) => {
-    // const deletedLetter = letters.filter((letter)=> letter.id !== id)
-    // setLetters(deletedLetter);
+    if(window.confirm("Are you sure you want to delete the letter?") === true){
+      const remainedLetters = letters.filter((letter)=>{
+        return letter.id !== filtered.id;
+      })
+      console.log('remainedLetters',remainedLetters); //확인완료
+      setLetters(remainedLetters);
+      alert("your letter has been successfully deleted!");
+      navigate("../");
+    } else {
+      return false;
+    }
+
+
+
+
   }
   if(letters.length === 0){
     <h1>데이터가 없습니다.</h1>

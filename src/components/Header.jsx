@@ -45,7 +45,7 @@ function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
 
   return (
     <HeaderArea>
-      <GoHomeBtn onClick={()=> {navigate("../Home")}}>Home</GoHomeBtn>
+      <GoHomeBtn onClick={()=> {navigate("../")}}>Home</GoHomeBtn>
     </HeaderArea>
   )
 }
