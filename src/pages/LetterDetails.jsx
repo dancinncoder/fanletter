@@ -145,15 +145,17 @@ const Message = styled.p`
 function LetterDetails({letters, setLetters}) {
 
   const { id } = useParams();
-  // const location = useLocation();
-  // console.log('????',location.state);
-  // console.log('모음',location);
   const navigate = useNavigate();
-  let filtered = letters?.find((item)=>item.id === Number(id));
-  console.log('filtered',filtered);
-  // console.log('letters',letters);
-  // console.log('usparams',id);
+  const location = useLocation();
+  const userName = location.state.userName;
+  const createdAt = location.state.createdAt;
+  const wroteTo = location.state.wroteTo;
+  const message = location.state.message;
+  console.log('list에서 가져온객체',location.state);
 
+
+  let filtered = letters?.find((item)=>item.id === id || Number(id));
+  console.log('filtered',filtered);
   const deleteLetterHandler = (id) => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
       const remainedLetters = letters.filter((letter)=>{

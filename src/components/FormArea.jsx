@@ -155,7 +155,6 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
       <MessageBox>
         message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
       </MessageBox>
-
     <SendButton type="submit">Send</SendButton>
   </Form>
   )
