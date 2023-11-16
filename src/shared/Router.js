@@ -11,6 +11,7 @@ function Router() {
   useEffect(()=>{
     const lettersData = require("../database/fakeData.json");
     setLetters(lettersData);
+    console.log('letters',letters);
   },[])
 
 

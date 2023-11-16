@@ -108,10 +108,11 @@ function Home({letters, setLetters}) {
           <PicturePaul src={picturePaul} alt="Paul picture"/>
         </ImgBtnBox>
         <LetterInputOutputArea>
+          
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
           <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
-          <List data={letters} letters={letters.filter((letter)=>{
+          <List letters={letters.filter((letter)=>{
             return letterShown[letter.wroteTo];  
           })}/>
         </LetterInputOutputArea>

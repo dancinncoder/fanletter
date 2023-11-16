@@ -102,7 +102,35 @@ function List({letters, setLetters}) {
   return (
     <ListOuterFrame>
       <ListArea>
-      {letters.map((letter)=>{
+      {letters.length === 0 ? (
+          <h4>There are no fan letters saved.<br /> Be the first one to post a fan letter!</h4>
+        ) : (
+          letters.map((letter) => (
+            <Letter
+              key={letter.id}
+              to={`/letter-details/${letter.id}`}
+              state={{
+                userName: letter.userName,
+                createdAt: letter.createdAt,
+                wroteTo: letter.wroteTo,
+                message: letter.message,
+              }}
+            >
+              <UserIcon />
+              <LetterContent>
+                <UserName>{letter.userName}</UserName>
+                <p>{letter.createdAt}</p>
+                <span>{letter.wroteTo},&nbsp;</span>
+                <Message>{letter.message}</Message>
+              </LetterContent>
+            </Letter>
+          ))
+        )}
+
+
+
+
+      {/* {letters.map((letter)=>{
         return(
           <Letter
             key={uuid()}
@@ -115,14 +143,15 @@ function List({letters, setLetters}) {
            >
             <UserIcon />
             <LetterContent>
-              <UserName>{letter.userName}</UserName>~
+              <UserName>{letter.userName}</UserName>
               <p>{letter.createdAt}</p>
               <span>{letter.wroteTo},&nbsp;</span>
               <Message>{letter.message}</Message>
             </LetterContent>
           </Letter>
         );
-      })}
+      })} */}
+      
       </ListArea>
     </ListOuterFrame>
 
