@@ -228,16 +228,26 @@ function LetterDetails({letters, setLetters}) {
 
   const editedAddHandler = (e) => {
     e.preventDefault();
-    // useParams 의 id 는 string, props의 id는 문자 또는 숫자이기 때문에 형변환이 필요
-    const numberedId = Number(id);
-    // 아이디 일치하는 객체 찾아 메세지내용만 바꿔줌.
-    const newEditedMessage = letters.map((letter)=>
-      letter.id === numberedId? {...letter, message: editedMessage}
-      : letter);
-    console.log('newEditedMessage',newEditedMessage);
-    setLetters(newEditedMessage);
-    setIsEditing(false);
-    
+    // validation check
+    if(message === editedMessage){
+      alert("There is no any change");
+    } else {
+      if(window.confirm("Are you sure you want to save the changes?") !== true) {
+        return;
+      } else {
+        // useParams 의 id 는 string, props의 id는 문자 또는 숫자이기 때문에 형변환이 필요
+        // const numberedId = id || Number(id);
+        // 아이디 일치하는 객체 찾아 메세지내용만 바꿔 전체 객체모음 배열반환
+        const newEditedLetters = letters.map((letter)=>
+        letter.id === id || Number(id)? {...letter, message: editedMessage}
+         : letter);
+        console.log('newEditedLetters',newEditedLetters);
+        setLetters(newEditedLetters);
+        alert("Your changes has been successfully updated!")
+        setIsEditing(false);
+      }
+    }
+
   };
 
   return (
