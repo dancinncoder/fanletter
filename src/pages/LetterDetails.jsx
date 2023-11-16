@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
@@ -142,6 +142,34 @@ const Message = styled.p`
   border-radius: 10px;
 `;
 
+const Textarea = styled.textarea`
+  border: none;
+  background-color: #e5e3e3;
+  resize: none;
+  overflow-y: hidden;
+  font-family: 'Apple SD Gothic Neo';
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #606060;
+  height: 128px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  padding: 0 0 10px 0;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 100%;
+  height: 175px;
+  padding: 0px;
+  margin: 0;
+`;
+
 function LetterDetails({letters, setLetters}) {
 
   const { id } = useParams();
@@ -152,7 +180,9 @@ function LetterDetails({letters, setLetters}) {
   const wroteTo = location.state.wroteTo;
   const message = location.state.message;
   console.log('list에서 가져온객체',location.state);
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedMessage, setEditedMessage] = useState(message);
+  const messageRef = useRef(message);
 
   let filtered = letters?.find((item)=>item.id === id || Number(id));
   console.log('filtered',filtered);
@@ -168,14 +198,48 @@ function LetterDetails({letters, setLetters}) {
     } else {
       return false;
     }
-
-
-
-
   }
+
   if(letters.length === 0){
     <h1>데이터가 없습니다.</h1>
   } 
+
+  const editHandler = () => {
+    setIsEditing(!isEditing);
+    console.log('setIsEditing is...', isEditing);
+  }
+
+  useEffect(() => {
+    // focus when it is edit mode
+    if (isEditing) {
+      const messageLength = messageRef.current.value.length;
+      messageRef.current.focus();
+      //place the location of the cursor to the last
+      messageRef.current.setSelectionRange(messageLength, messageLength);
+    }
+  }, [isEditing]);
+
+  const editedTypeHandler = (event) => {
+    const editedSavedMessage = event.target.value;
+    setEditedMessage(editedSavedMessage);
+    console.log('!!!!!',editedMessage);
+    console.log('editedSavedMessage',editedSavedMessage);
+  }
+
+  const editedAddHandler = (e) => {
+    e.preventDefault();
+    // useParams 의 id 는 string, props의 id는 문자 또는 숫자이기 때문에 형변환이 필요
+    const numberedId = Number(id);
+    // 아이디 일치하는 객체 찾아 메세지내용만 바꿔줌.
+    const newEditedMessage = letters.map((letter)=>
+      letter.id === numberedId? {...letter, message: editedMessage}
+      : letter);
+    console.log('newEditedMessage',newEditedMessage);
+    setLetters(newEditedMessage);
+    setIsEditing(false);
+    
+  };
+
   return (
     <div>
       <GlobalStyle />
@@ -184,22 +248,47 @@ function LetterDetails({letters, setLetters}) {
         <BtnArea>
           <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>
         </BtnArea>
-        <Letter>
-          <UserNameAndCreatedAt>
-            <UserInfo>
-              <UserIcon />
-              <p>{filtered.userName}</p>
-            </UserInfo>
-            <CreatedAt>{filtered.createdAt}</CreatedAt>
-          </UserNameAndCreatedAt>
-          <WroteTo>To: {filtered.wroteTo}</WroteTo>
-          <Message>{filtered.message}</Message>
-        </Letter>
-        <EditBtnArea>
-          <Button alt="Edit Button">Edit</Button>
-          <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
-          <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
-        </EditBtnArea>
+        {isEditing? (
+          <>
+            <Letter style={{ justifyContent: 'center' }}>
+              <UserNameAndCreatedAt>
+                <UserInfo>
+                  <UserIcon />
+                  <p>{filtered.userName}</p>
+                  </UserInfo>
+                  <CreatedAt>{filtered.createdAt}</CreatedAt>
+              </UserNameAndCreatedAt>
+              <WroteTo>To: {filtered.wroteTo}</WroteTo>
+              <Form onSubmit={editedAddHandler}>
+                <Message><Textarea onChange={editedTypeHandler} ref={messageRef}>{filtered.message}</Textarea></Message>
+                {/* <button type="submit"></button> */}
+              </Form>
+            </Letter>
+            <EditBtnArea>
+              <Button type="submit" alt="Save Button" onClick={editedAddHandler} >Save</Button>
+              <Button alt="Cancel Button" onClick={editHandler} >Cancel</Button>
+            </EditBtnArea>
+          </>
+        ) : (
+          <>
+            <Letter>
+              <UserNameAndCreatedAt>
+                <UserInfo>
+                <UserIcon />
+                  <p>{filtered.userName}</p>
+                </UserInfo>
+                <CreatedAt>{filtered.createdAt}</CreatedAt>
+              </UserNameAndCreatedAt>
+              <WroteTo>To: {filtered.wroteTo}</WroteTo>
+              <Message>{filtered.message}</Message>
+            </Letter>
+            <EditBtnArea>
+              <Button alt="Edit Button" onClick={editHandler}>Edit</Button>
+              <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
+              <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
+            </EditBtnArea>
+          </>
+        )}  
       </Main>
 
     </div>
