@@ -5,6 +5,7 @@ import GlobalStyle from '../GlobalStyle';
 import goHomeBtn2 from '../assets/gohome-icon2.png';
 import UserIcon from '../components/UserIcon';
 import Header from 'components/Header';
+import { useState } from 'react';
 
 const Letter = styled.div`
   display: flex;
@@ -21,15 +22,6 @@ const Letter = styled.div`
   padding: 10px 50px 10px 50px;
 `;
 
-// const Header = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: start;
-//   align-items: center;
-//   height: 100px;
-//   background-color: #272727;
-// `;
-
 const Main = styled.div`
   display: flex;
   flex-direction: row;
@@ -38,22 +30,6 @@ const Main = styled.div`
   height: 90vh;
   background-color: #272727;
 `;
-
-// const GoHomeBtn = styled.button`
-//   color: #ffffff;
-//   background-color: #272727;
-//   width: 130px;
-//   height: 70px;
-//   font-size: 1.2rem;
-//   margin: 10px;
-//   border: none;
-//   cursor: pointer;
-//   transition: 0.1s ease-in;
-//   &:hover {
-//     transform: scale(1.03);
-//     color: #e49090;
-//   }
-// `;
 
 const GoHomeBtn2 = styled.img`
   /* height: 90vh; */
@@ -136,8 +112,6 @@ const UserInfo = styled.div`
   font-weight: 800;
 `;
 
-
-
 const CreatedAt = styled.p`
   font-weight: 600;
 `;
@@ -168,18 +142,32 @@ const Message = styled.p`
   border-radius: 10px;
 `;
 
-function LetterDetails({}) {
+function LetterDetails({letters, setLetters}) {
 
   const { id } = useParams();
   const location = useLocation();
-  const userName = location.state.userName;
-  const createdAt = location.state.createdAt;
-  const wroteTo = location.state.wroteTo;
-  const message = location.state.message;
+  // const userName = location.state.userName;
+  // const createdAt = location.state.createdAt;
+  // const wroteTo = location.state.wroteTo;
+  // const message = location.state.message;
+  // const letters= location.state;
+  // const setLetters = useState(letters);
+  // const {letters, letter} = location.state;
+  console.log('????',location.state);
+  console.log('모음',location);
   const navigate = useNavigate();
+  let filtered = letters?.find((item)=>item.id === Number(id));
+  // console.log(filtered);
+  console.log('letters',letters);
+  console.log('usparams',id);
 
-
-
+  const deleteLetterHandler = (id) => {
+    // const deletedLetter = letters.filter((letter)=> letter.id !== id)
+    // setLetters(deletedLetter);
+  }
+  if(letters.length === 0){
+    <h1>데이터가 없습니다.</h1>
+  } 
   return (
     <div>
       <GlobalStyle />
@@ -192,17 +180,17 @@ function LetterDetails({}) {
           <UserNameAndCreatedAt>
             <UserInfo>
               <UserIcon />
-              <p>{userName}</p>
+              <p>{filtered.userName}</p>
             </UserInfo>
-            <CreatedAt>{createdAt}</CreatedAt>
+            <CreatedAt>{filtered.createdAt}</CreatedAt>
           </UserNameAndCreatedAt>
-          <WroteTo>To: {wroteTo}</WroteTo>
-          <Message>{message}</Message>
+          <WroteTo>To: {filtered.wroteTo}</WroteTo>
+          <Message>{filtered.message}</Message>
         </Letter>
         <EditBtnArea>
           <Button alt="Edit Button">Edit</Button>
-          <Button alt="Delete Button">Delete</Button>
-          <Button onClick={()=> {navigate(-1)}} alt="Back Button">Back</Button>
+          <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
+          <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
         </EditBtnArea>
       </Main>
 

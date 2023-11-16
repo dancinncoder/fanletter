@@ -39,16 +39,6 @@ const GoHomeBtn = styled.button`
   }
 `;
 
-// function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
-//   return (
-//     <HeaderArea>
-//       <h1>Letters To Your Character</h1>
-//       <p>Send a letter to one of characters that Timothée Chalamet's played in roles!</p>
-//       <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
-//     </HeaderArea>
-//   )
-// }
-
 function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
 
   const navigate = useNavigate();

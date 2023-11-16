@@ -107,14 +107,10 @@ function List({letters, setLetters}) {
           <Letter
             key={uuid()}
             to={`/letter-details/${letter.id}`}
-            state={{userName : letter.userName
-            , createdAt : letter.createdAt
-            , wroteTo : letter.wroteTo
-            , message : letter.message
-          }}>
+           >
             <UserIcon />
             <LetterContent>
-              <UserName>{letter.userName}</UserName>
+              <UserName>{letter.userName}</UserName>~
               <p>{letter.createdAt}</p>
               <span>{letter.wroteTo},&nbsp;</span>
               <Message>{letter.message}</Message>

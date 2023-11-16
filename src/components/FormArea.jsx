@@ -128,8 +128,12 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
       alert("Only spaces have been entered.");
       return;
     } else {
-      setLetters([...letters, newLetter]);
-      alert("Your letter has been successfully sent!");
+      if(window.confirm("Are you sure you want to send the letter?") === true){
+        setLetters([...letters, newLetter]);
+        alert("Your letter has been successfully sent!");
+      } else {
+        return false;
+      }
       // input box init
         setUserName("");
         setMessage("");

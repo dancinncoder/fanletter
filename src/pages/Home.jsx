@@ -74,7 +74,7 @@ const LetterInputOutputArea = styled.div`
   }
 `;
 
-function Home() {
+function Home({letters, setLetters}) {
   const [letterShown, setLetterShown] = useState({
     'Paul' : true,
     'Elio' : false,
@@ -82,12 +82,6 @@ function Home() {
     'Lee' : false,
   });
   const [createdAt, setCreatedAt] = useState("");
-
-  const [letters, setLetters] = useState([]);
-  useEffect(()=>{
-    const lettersData = require("../database/fakeData.json");
-    setLetters(lettersData);
-  },[])
 
   const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -117,7 +111,7 @@ function Home() {
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
           <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
-          <List letters={letters.filter((letter)=>{
+          <List data={letters} letters={letters.filter((letter)=>{
             return letterShown[letter.wroteTo];  
           })}/>
         </LetterInputOutputArea>
