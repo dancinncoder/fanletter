@@ -9,15 +9,34 @@ import { useNavigate } from 'react-router-dom';
 
 const HeaderArea = styled.header`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 50px;
   height: 100px;
-  width: 1300px;
-  color: white;
+  background-color: #272727;
+  width: 100%;
   margin: 0;
   padding: 0;
+`;
+
+const GoHomeBtn = styled.button`
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: #ffffff;
+  background-color: #272727;
+  width: 130px;
+  height: 70px;
+  font-size: 1.2rem;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+  &:hover {
+    transform: scale(1.03);
+    color: #e49090;
+  }
 `;
 
 // function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
@@ -36,10 +55,7 @@ function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
 
   return (
     <HeaderArea>
-      <button onClick={()=> {navigate("../Home")}}>Home</button>
-      {/* <h1>Letters To Your Character</h1> */}
-      {/* <p><i>Send a letter to one of characters that Timothée Chalamet's played in roles !</i></p> */}
-      {/* <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/> */}
+      <GoHomeBtn onClick={()=> {navigate("../Home")}}>Home</GoHomeBtn>
     </HeaderArea>
   )
 }

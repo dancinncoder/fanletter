@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
 import goHomeBtn2 from '../assets/gohome-icon2.png';
 import UserIcon from '../components/UserIcon';
+import Header from 'components/Header';
 
 const Letter = styled.div`
   display: flex;
@@ -20,14 +21,14 @@ const Letter = styled.div`
   padding: 10px 50px 10px 50px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  height: 100px;
-  background-color: #272727;
-`;
+// const Header = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: start;
+//   align-items: center;
+//   height: 100px;
+//   background-color: #272727;
+// `;
 
 const Main = styled.div`
   display: flex;
@@ -38,21 +39,21 @@ const Main = styled.div`
   background-color: #272727;
 `;
 
-const GoHomeBtn = styled.button`
-  color: #ffffff;
-  background-color: #272727;
-  width: 130px;
-  height: 70px;
-  font-size: 1.2rem;
-  margin: 10px;
-  border: none;
-  cursor: pointer;
-  transition: 0.1s ease-in;
-  &:hover {
-    transform: scale(1.03);
-    color: #e49090;
-  }
-`;
+// const GoHomeBtn = styled.button`
+//   color: #ffffff;
+//   background-color: #272727;
+//   width: 130px;
+//   height: 70px;
+//   font-size: 1.2rem;
+//   margin: 10px;
+//   border: none;
+//   cursor: pointer;
+//   transition: 0.1s ease-in;
+//   &:hover {
+//     transform: scale(1.03);
+//     color: #e49090;
+//   }
+// `;
 
 const GoHomeBtn2 = styled.img`
   /* height: 90vh; */
@@ -182,9 +183,7 @@ function LetterDetails({}) {
   return (
     <div>
       <GlobalStyle />
-      <Header>
-        <GoHomeBtn onClick={()=> {navigate(-1)}}>Home</GoHomeBtn>
-      </Header>
+      <Header/>
       <Main>
         <BtnArea>
           <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>

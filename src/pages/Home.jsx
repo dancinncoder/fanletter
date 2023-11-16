@@ -50,7 +50,7 @@ const ImgBtnBox = styled.div`
 
 const PicturePaul = styled.img`
   display: block;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   max-width:90%;
