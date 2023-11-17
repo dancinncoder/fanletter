@@ -179,7 +179,7 @@ function LetterDetails({letters, setLetters}) {
   const [editedMessage, setEditedMessage] = useState(message);
   const messageRef = useRef(message);
 
-  let filtered = letters?.find((item)=>item.id === id || Number(id));
+  let filtered = letters?.find((item)=>item.id === id );
   console.log('filtered',filtered);
   const deleteLetterHandler = (id) => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
@@ -231,11 +231,11 @@ function LetterDetails({letters, setLetters}) {
         return;
       } else {
         const newEditedLetters = letters.map((letter)=>
-        letter.id === id || Number(id)? {...letter, message: editedMessage}
+        letter.id === id ? {...letter, message: editedMessage}
          : letter);
         console.log('newEditedLetters',newEditedLetters);
         setLetters(newEditedLetters);
-        alert("Your changes has been successfully updated!")
+        alert("Your changes has been successfully updated!");
         setIsEditing(false);
       }
     }
