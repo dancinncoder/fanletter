@@ -10,8 +10,6 @@ const ButtonBox = styled.div`
 `;
 
 const ButtonI = styled.button`
-  /* width: 100px;
-  height: 50px; */
   font-weight: 500;
   width: 15%;
   height: 100px;
@@ -40,24 +38,13 @@ const ButtonI = styled.button`
   &:nth-child(4){
     bottom: 19%;
   }
-
-  /* &:hover {
-    background-color: night-rider;
-    border: none;
-    color:white;
-    transform: scale(1.03);
-  } */
   background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? '#343434' : 'black')};
   color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'white')};
-
-
-
 `;
 
 function Button({setLetterShown})
 {
   const [selectedCharacterId, setSelectedCharacterId] = useState(1);
-
   const [buttonText, setButtonText] = useState(
     [
       {id:1, name: "Paul"},
@@ -66,7 +53,6 @@ function Button({setLetterShown})
       {id:4, name: "Lee"},
     ]
   );
-
   const buttonByNameClickHandler = (item) => {
     setSelectedCharacterId(item.id);
     const allFalse = 

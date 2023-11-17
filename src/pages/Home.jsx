@@ -14,7 +14,6 @@ import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
 import FormArea from '../components/FormArea';
-// import Image from '../components/Image';
 // Image
 import picturePaul from '../assets/dune-Paul.png';
 
@@ -28,17 +27,14 @@ const OuterFrame = styled.div`
   padding: 0;
 `;
 
-
 const Main = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 60px;
-  /* width: 100%; */
   max-width: 100%;
   height: 100vh;
-  /* border: 1px solid red; */
   margin: 0;
 `;
 
@@ -66,7 +62,6 @@ const LetterInputOutputArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid yellow; */
   margin-top: 0;
   width: 100%;
   &:nth-child(2) {
@@ -108,7 +103,6 @@ function Home({letters, setLetters}) {
           <PicturePaul src={picturePaul} alt="Paul picture"/>
         </ImgBtnBox>
         <LetterInputOutputArea>
-          
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
           <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>

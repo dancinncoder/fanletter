@@ -100,7 +100,6 @@ const UserNameAndCreatedAt = styled.div`
   padding-right: 15px;
   gap: 20px;
   width: 103%;
-  /* border: 1px solid red; */
 `;
 
 const UserInfo = styled.div`
@@ -120,21 +119,17 @@ const WroteTo = styled.p`
   align-self: flex-start;
   width: 80%;
   padding: 0 5px 5px 5px;
-  /* margin: 0 50px 0 40px; */
   margin: 0 5px 5px 5px;
   font-size: 1.2rem;
   font-weight: 700;
   color: #e49090;
-  /* border: 1px solid blue; */
 `;
 
 const Message = styled.p`
   align-self: flex-start;
-  /* width: 560px; */
   width: 93%;
   height: 150px;
   padding: 20px 20px 5px 20px;
-  /* margin: 10px 50px 0 50px; */
   margin: 0;
   font-size: 1.2rem;
   font-weight: 500;
@@ -235,9 +230,6 @@ function LetterDetails({letters, setLetters}) {
       if(window.confirm("Are you sure you want to save the changes?") !== true) {
         return;
       } else {
-        // useParams 의 id 는 string, props의 id는 문자 또는 숫자이기 때문에 형변환이 필요
-        // const numberedId = id || Number(id);
-        // 아이디 일치하는 객체 찾아 메세지내용만 바꿔 전체 객체모음 배열반환
         const newEditedLetters = letters.map((letter)=>
         letter.id === id || Number(id)? {...letter, message: editedMessage}
          : letter);
@@ -271,7 +263,6 @@ function LetterDetails({letters, setLetters}) {
               <WroteTo>To: {filtered.wroteTo}</WroteTo>
               <Form onSubmit={editedAddHandler}>
                 <Message><Textarea onChange={editedTypeHandler} ref={messageRef}>{filtered.message}</Textarea></Message>
-                {/* <button type="submit"></button> */}
               </Form>
             </Letter>
             <EditBtnArea>

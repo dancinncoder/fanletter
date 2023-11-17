@@ -5,11 +5,9 @@ import { useEffect } from 'react';
 import uuid from 'react-uuid';
 import moment from 'moment';
 
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
   gap: 10px;
   font-size: 1rem;
@@ -59,7 +57,6 @@ const ToUserName = styled.div`
   gap: 10px;
   height: 20px;
   margin: 2px 20px 2px 20px;
-  /* border: 1px solid red; */
 `;
 
 const MessageBox = styled.div`

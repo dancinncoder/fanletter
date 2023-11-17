@@ -6,17 +6,11 @@ import UserIcon from './UserIcon';
 
 
 const ListArea = styled.div`
-  /* border: 1px solid black;
-  width: 450px;
-  height: 400px;
-  margin: 50px 25px 50px 25px; */
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* border-radius: 20px; */
   width: 90%;
   height: 300px;
   margin: 10px;
@@ -64,12 +58,6 @@ const Message = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;  
 `;
-
-// const UserIconImg = styled.img`
-//   align-self: start;
-//   margin: 20px;
-//   width: 50px;
-// `;
 
 const LetterContent = styled.div`
   display: flex;
@@ -126,32 +114,6 @@ function List({letters, setLetters}) {
             </Letter>
           ))
         )}
-
-
-
-
-      {/* {letters.map((letter)=>{
-        return(
-          <Letter
-            key={uuid()}
-            to={`/letter-details/${letter.id}`}
-            state={{userName : letter.userName
-              , createdAt : letter.createdAt
-              , wroteTo : letter.wroteTo
-              , message : letter.message
-            }}
-           >
-            <UserIcon />
-            <LetterContent>
-              <UserName>{letter.userName}</UserName>
-              <p>{letter.createdAt}</p>
-              <span>{letter.wroteTo},&nbsp;</span>
-              <Message>{letter.message}</Message>
-            </LetterContent>
-          </Letter>
-        );
-      })} */}
-      
       </ListArea>
     </ListOuterFrame>
 
