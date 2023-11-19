@@ -1,8 +1,9 @@
 import React from 'react'
 import {styled} from "styled-components";
-import uuid from 'react-uuid';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserIcon from './UserIcon';
+import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
+import { useContext } from 'react';
 
 
 const ListArea = styled.div`
@@ -86,7 +87,9 @@ const ListOuterFrame = styled.div`
   padding: 10px;
 `;
 
-function List({letters, setLetters}) {
+function List() {
+  const { letters } = useContext(FilteredLettersByNameContext);
+  console.log('filtered letters in list', letters);
   return (
     <ListOuterFrame>
       <ListArea>

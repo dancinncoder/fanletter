@@ -6,6 +6,8 @@ import goHomeBtn2 from '../assets/gohome-icon2.png';
 import UserIcon from '../components/UserIcon';
 import Header from 'components/Header';
 import { useState } from 'react';
+import { LettersContext } from 'context/LettersContext';
+import { useContext } from 'react';
 
 const Letter = styled.div`
   display: flex;
@@ -165,12 +167,9 @@ const Form = styled.form`
   margin: 0;
 `;
 
-function LetterDetails({letters, setLetters}) {
+function LetterDetails() {
+  const { letters, setLetters } = useContext(LettersContext);
   const { id } = useParams();
-
-;
-  
-
   const navigate = useNavigate();
   const location = useLocation();
   const userName = location.state.userName;
@@ -246,6 +245,8 @@ function LetterDetails({letters, setLetters}) {
 
   return (
     <div>
+      {console.log("letters in detail page", letters)}
+      {/* 데이터 들어오는 것 확인 */}
       <GlobalStyle />
       <Header/>
       <Main>

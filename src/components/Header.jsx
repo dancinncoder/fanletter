@@ -1,11 +1,6 @@
 import React from 'react'
 import {styled} from "styled-components";
 import { useNavigate } from 'react-router-dom';
-// import {useState} from 'react';
-// import { useEffect } from 'react';
-// import uuid from 'react-uuid';
-// import moment from 'moment';
-
 
 const HeaderArea = styled.header`
   display: flex;
@@ -39,7 +34,7 @@ const GoHomeBtn = styled.button`
   }
 `;
 
-function Header({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
+function Header() {
 
   const navigate = useNavigate();
 

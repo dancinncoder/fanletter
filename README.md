@@ -1,6 +1,6 @@
 # Fan Letter Website
 
-Building Fan Letter Website using React
+Building Fan Letter Website Using React
 
 ## Project Type
 
@@ -20,7 +20,7 @@ Individual Project
 6. React Router Dom (Multiple Pages Building)
 
 ## Data Manamgement
-Props-drilling
+Context API
 
 ## Features
 

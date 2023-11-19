@@ -1,6 +1,8 @@
 import React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import { styled } from 'styled-components';
+import { ButtonLetterContext } from 'context/ButtonLetterContext';
+import { useContext } from 'react';
 
 const ButtonBox = styled.div`
   display: flex;
@@ -42,8 +44,8 @@ const ButtonI = styled.button`
   color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'white')};
 `;
 
-function Button({setLetterShown})
-{
+function Button(){
+  const { setLetterShown, letterShown } = useContext(ButtonLetterContext);
   const [selectedCharacterId, setSelectedCharacterId] = useState(1);
   const [buttonText, setButtonText] = useState(
     [

@@ -5,6 +5,11 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { LettersContext } from 'context/LettersContext';
+import { FormAreaContext } from 'context/FormAreaContext';
+import { ButtonLetterContext } from 'context/ButtonLetterContext';
+import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
 // CSS
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
@@ -69,7 +74,10 @@ const LetterInputOutputArea = styled.div`
   }
 `;
 
-function Home({letters, setLetters}) {
+function Home() {
+  const {letters, setLetters} = useContext(LettersContext);
+  console.log('letters at home', letters); // 데이터 들어오는 거 확인
+
   const [letterShown, setLetterShown] = useState({
     'Paul' : true,
     'Elio' : false,
@@ -93,12 +101,14 @@ function Home({letters, setLetters}) {
     userNameRef.current.focus();
   })
 
+  const filteredByName = letters.filter((letter)=>{
+    return letterShown[letter.wroteTo];
+  })
 
   return (
     <OuterFrame>
-      {console.log("letters in home", letters)}
       <GlobalStyle />
-      <Header letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
+      <Header />
       <Main>
         <ImgBtnBox>
           <PicturePaul src={picturePaul} alt="Paul picture"/>
@@ -106,12 +116,20 @@ function Home({letters, setLetters}) {
         <LetterInputOutputArea>
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
-          <FormArea letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
-          <List letters={letters.filter((letter)=>{
+          <FormAreaContext.Provider value={{createdAt, userNameRef}}>
+            <FormArea />
+          </FormAreaContext.Provider>
+          {/* <List letters={letters.filter((letter)=>{
             return letterShown[letter.wroteTo];  
-          })}/>
+          })}/> */}
+          {/* <List letters={filteredByName}/> */}
+          <FilteredLettersByNameContext.Provider value={{ letters : filteredByName}}>
+              <List />
+          </FilteredLettersByNameContext.Provider>
         </LetterInputOutputArea>
-        <Button setLetterShown={setLetterShown} letters={letters}/>
+        <ButtonLetterContext.Provider value={{letterShown, setLetterShown}}>
+          <Button />
+        </ButtonLetterContext.Provider>
       </Main>
       <Footer />
     </OuterFrame>

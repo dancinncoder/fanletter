@@ -4,6 +4,9 @@ import {useState} from 'react';
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
 import moment from 'moment';
+import { LettersContext } from 'context/LettersContext';
+import { FormAreaContext } from 'context/FormAreaContext';
+import { useContext } from 'react';
 
 const Form = styled.form`
   display: flex;
@@ -67,8 +70,9 @@ const MessageBox = styled.div`
   margin: 2px 20px 2px 20px;
 `;
 
-function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
-
+function FormArea() {
+  const { createdAt, userNameRef } = useContext(FormAreaContext);
+  const { letters, setLetters } = useContext(LettersContext);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [wroteTo, setWroteTo] = useState("");
@@ -139,6 +143,8 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
 
   return (
     <Form onSubmit={addHandler}>
+      {console.log("letters at form area", letters)}
+      {/* 데이터 들어오는거 확인 */}
       <ToUserName>
         {/* name은 옵션값의 Key 명이 될 이름이다. */}
         To...<select name="wroteTo" value={letters.wroteTo}  onChange={selectHandler}>
