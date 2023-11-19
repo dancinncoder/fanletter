@@ -20,7 +20,7 @@ Individual Project
 6. React Router Dom (Multiple Pages Building)
 
 ## Data Manamgement
-Context API
+Redux
 
 ## Features
 
