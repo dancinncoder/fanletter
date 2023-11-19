@@ -166,8 +166,11 @@ const Form = styled.form`
 `;
 
 function LetterDetails({letters, setLetters}) {
-
   const { id } = useParams();
+
+;
+  
+
   const navigate = useNavigate();
   const location = useLocation();
   const userName = location.state.userName;
@@ -178,7 +181,6 @@ function LetterDetails({letters, setLetters}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const messageRef = useRef(message);
-
   let filtered = letters?.find((item)=>item.id === id );
   console.log('filtered',filtered);
   const deleteLetterHandler = (id) => {

@@ -96,6 +96,7 @@ function Home({letters, setLetters}) {
 
   return (
     <OuterFrame>
+      {console.log("letters in home", letters)}
       <GlobalStyle />
       <Header letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
       <Main>
