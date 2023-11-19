@@ -7,7 +7,7 @@ function Router() {
 
   const [letters, setLetters] = useState([]);
 
-  // 세부정보페이지에서 새로고침하면 데이터가 없다고 오류가 뜨는데 해결방법이 궁금합니다.
+  // 세부정보페이지에서 새로고침하면 데이터가 없다고 오류가 뜨는데 해결방법이 궁금합니다
   useEffect(()=>{
     const lettersData = require("../database/fakeData.json");
     setLetters(lettersData);
