@@ -1,6 +1,7 @@
 import Router from "shared/Router";
 import React, { useEffect, useState } from 'react';
-import { LettersContext } from "context/LettersContext";
+import { Provider } from "react-redux"
+import store from "redux/config/configStore";
 
 function App() {
 
@@ -30,9 +31,9 @@ function App() {
 
 
   return (
-    <LettersContext.Provider value={{letters, setLetters}}>
-      <Router letters={letters} setLetters={setLetters}/>
-    </LettersContext.Provider>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   );
 }
 

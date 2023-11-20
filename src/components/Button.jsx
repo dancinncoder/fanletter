@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import { ButtonLetterContext } from 'context/ButtonLetterContext';
 import { useContext } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import { setCharacter } from 'redux/modules/character';
 
 const ButtonBox = styled.div`
   display: flex;
@@ -45,7 +47,9 @@ const ButtonI = styled.button`
 `;
 
 function Button(){
-  const { setLetterShown, letterShown } = useContext(ButtonLetterContext);
+  const letterShown = useSelector(state => state.character);
+  const dispatch = useDispatch();
+  // const { setLetterShown, letterShown } = useContext(ButtonLetterContext);
   const [selectedCharacterId, setSelectedCharacterId] = useState(1);
   const [buttonText, setButtonText] = useState(
     [
@@ -64,7 +68,8 @@ function Button(){
       'Gatsby' : false,
       'Lee' : false,
     };
-    setLetterShown({ ...allFalse, [item.name] : true});
+    dispatch((setCharacter({ ...allFalse, [item.name] : true})));
+    // setLetterShown({ ...allFalse, [item.name] : true});
   }
 
 

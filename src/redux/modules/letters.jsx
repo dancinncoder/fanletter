@@ -1,34 +1,50 @@
 // letters.jsx 에는 letter에 대한 state들이 모여있다.
 import uuid from 'react-uuid';
 import moment from 'moment';
+import fakeData from 'database/fakeData.json';
 const ADD_LETTER = "letters/ADD_LETTER";
+const DELETE_LETTER = "letters/DELETE_LETTER";
+const EDIT_LETTER = "letters/EDIT_LETTER";
 
 
 export const addLetter = (payload) => {
   return {
     type: ADD_LETTER,
-    payload: payload,
+    payload,
+  }
+}
+export const deleteLetter = (payload) => {
+  return {
+    type: DELETE_LETTER,
+    payload,
+  }
+}
+export const editLetter = (payload) => {
+  return {
+    type: EDIT_LETTER,
+    payload,
   }
 }
 
-
-
-// const initialState = useEffect(()=>{
-//   const lettersData = require("../src/database/fakeData.json");
-//   // setLetters(lettersData);
-//   console.log('letters In useEffect',lettersData);
-// },[])
-
-const initialState = [  {id: "1", userName: "Hamin", createdAt: "23-11-15 10:55", message:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ", wroteTo: "Paul" }
-,
-{id: "2", userName: "Rose", createdAt: "23-11-15 10:55", message:"The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.", wroteTo: "Paul" }
-,
-];
+const initialState = fakeData;
 
 const letters = (state = initialState, action) => {
   switch (action.type){
     case ADD_LETTER:
+      const newLetter = action.payload;
       return [...state, action.payload]; //set~();
+    case DELETE_LETTER:
+      const letterId = action.payload;
+      return state.filter(letter=> letter.id !== letterId);
+    case EDIT_LETTER:
+      const  { id, editedMessage} = action.payload;
+      return state.map((letter)=> {
+        if(letter.id === id){
+          return {...letter, message: editedMessage};
+        } else {
+          return letter;
+        }
+      })
     default:
       return state;
   }

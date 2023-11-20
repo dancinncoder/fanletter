@@ -2,9 +2,7 @@ import React from 'react'
 import {styled} from "styled-components";
 import { Link } from 'react-router-dom';
 import UserIcon from './UserIcon';
-import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
-import { useContext } from 'react';
-
+import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
 
 const ListArea = styled.div`
   overflow-y: scroll;
@@ -88,8 +86,10 @@ const ListOuterFrame = styled.div`
 `;
 
 function List() {
-  const { letters } = useContext(FilteredLettersByNameContext);
-  console.log('filtered letters in list', letters);
+  const FilteredLettersByNameContext = useSelector((state) => state.character);
+  const letters = useSelector((state)=> state.letters);
+  // const { letters } = useContext(FilteredLettersByNameContext);
+
   return (
     <ListOuterFrame>
       <ListArea>

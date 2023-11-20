@@ -6,9 +6,9 @@ import goHomeBtn2 from '../assets/gohome-icon2.png';
 import UserIcon from '../components/UserIcon';
 import Header from 'components/Header';
 import { useState } from 'react';
-import { LettersContext } from 'context/LettersContext';
-import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteLetter, editLetter } from 'redux/modules/letters';
+
 
 const Letter = styled.div`
   display: flex;
@@ -171,9 +171,8 @@ const Form = styled.form`
 function LetterDetails() {
 
   //redux -----------------------------
-  const letters = useSelector((state)=>{
-    return state.letters;
-  });
+  const dispatch = useDispatch();
+  const letters = useSelector(state=>state.letters);
 
   console.log('letters in 상세페이지', letters);
 
@@ -194,13 +193,15 @@ function LetterDetails() {
   const messageRef = useRef(message);
   let filtered = letters?.find((item)=>item.id === id );
   console.log('filtered',filtered);
+  
   const deleteLetterHandler = (id) => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
-      const remainedLetters = letters.filter((letter)=>{
-        return letter.id !== filtered.id;
-      })
-      console.log('remainedLetters',remainedLetters); //확인완료
-      setLetters(remainedLetters);
+      dispatch(deleteLetter(id));
+      // const remainedLetters = letters.filter((letter)=>{
+      //   return letter.id !== filtered.id;
+      // })
+      // console.log('remainedLetters',remainedLetters); //확인완료
+      // setLetters(remainedLetters);
       alert("your letter has been successfully deleted!");
       navigate("../");
     } else {
@@ -243,11 +244,12 @@ function LetterDetails() {
       if(window.confirm("Are you sure you want to save the changes?") !== true) {
         return;
       } else {
-        const newEditedLetters = letters.map((letter)=>
-        letter.id === id ? {...letter, message: editedMessage}
-         : letter);
-        console.log('newEditedLetters',newEditedLetters);
-        setLetters(newEditedLetters);
+        dispatch(editLetter(id, editedMessage));
+        // const newEditedLetters = letters.map((letter)=>
+        // letter.id === id ? {...letter, message: editedMessage}
+        //  : letter);
+        // console.log('newEditedLetters',newEditedLetters);
+        // setLetters(newEditedLetters);
         alert("Your changes has been successfully updated!");
         setIsEditing(false);
       }
