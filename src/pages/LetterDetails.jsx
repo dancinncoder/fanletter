@@ -9,6 +9,132 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteLetter, editLetter } from 'redux/modules/letters';
 
+function LetterDetails() {
+  const dispatch = useDispatch();
+  const letters = useSelector(state=>state.letters);
+
+  console.log('letters in 상세페이지', letters);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userName = location.state.userName;
+  const createdAt = location.state.createdAt;
+  const wroteTo = location.state.wroteTo;
+  const message = location.state.message;
+  console.log('list에서 가져온객체',location.state);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedMessage, setEditedMessage] = useState(message);
+  const messageRef = useRef(message);
+
+  let filtered = letters?.find((item)=>item.id === id );
+  console.log('filtered',filtered);
+  
+  const deleteLetterHandler = () => {
+    if(window.confirm("Are you sure you want to delete the letter?") === true){
+      console.log('선택한id', id);// 여기 아이디가 문제
+      dispatch(deleteLetter(id));
+      alert("your letter has been successfully deleted!");
+      navigate("../");
+    } else {
+      return false;
+    }
+  }
+
+  if(letters.length === 0){
+    <h1>데이터가 없습니다.</h1>
+  } 
+
+  const editHandler = () => {
+    setIsEditing(!isEditing);
+    console.log('setIsEditing is...', isEditing);
+  }
+
+  useEffect(() => {
+    // focus when it is edit mode
+    if (isEditing) {
+      const messageLength = messageRef.current.value.length;
+      messageRef.current.focus();
+      //place the location of the cursor to the last
+      messageRef.current.setSelectionRange(messageLength, messageLength);
+    }
+  }, [isEditing]);
+
+  const editedTypeHandler = (event) => {
+    const editedSavedMessage = event.target.value;
+    setEditedMessage(editedSavedMessage);
+  }
+
+  const editedAddHandler = (e) => {
+    e.preventDefault();
+    // validation check
+    if(message === editedMessage){
+      alert("There is no any change");
+    } else {
+      if(window.confirm("Are you sure you want to save the changes?") !== true) {
+        return;
+      } else {
+        dispatch(editLetter(id, editedMessage));
+        alert("Your changes has been successfully updated!");
+        setIsEditing(false);
+      }
+    }
+
+  };
+
+  return (
+    <div>
+      <GlobalStyle />
+      <Header/>
+      <Main>
+        <BtnArea>
+          <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>
+        </BtnArea>
+        {isEditing? (
+          <>
+            <Letter>
+              <UserNameAndCreatedAt>
+                <UserInfo>
+                  <UserIcon />
+                  <p>{filtered.userName}</p>
+                  </UserInfo>
+                  <CreatedAt>{filtered.createdAt}</CreatedAt>
+              </UserNameAndCreatedAt>
+              <WroteTo>To: {filtered.wroteTo}</WroteTo>
+              <Form onSubmit={editedAddHandler}>
+                <Message><Textarea onChange={editedTypeHandler} ref={messageRef}>{filtered.message}</Textarea></Message>
+              </Form>
+            </Letter>
+            <EditBtnArea>
+              <Button type="submit" alt="Save Button" onClick={editedAddHandler} >Save</Button>
+              <Button alt="Cancel Button" onClick={editHandler} >Cancel</Button>
+            </EditBtnArea>
+          </>
+        ) : (
+          <>
+            <Letter>
+              <UserNameAndCreatedAt>
+                <UserInfo>
+                <UserIcon />
+                  <p>{filtered.userName}</p>
+                </UserInfo>
+                <CreatedAt>{filtered.createdAt}</CreatedAt>
+              </UserNameAndCreatedAt>
+              <WroteTo>To: {filtered.wroteTo}</WroteTo>
+              <Message>{filtered.message}</Message>
+            </Letter>
+            <EditBtnArea>
+              <Button alt="Edit Button" onClick={editHandler}>Edit</Button>
+              <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
+              <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
+            </EditBtnArea>
+          </>
+        )}  
+      </Main>
+
+    </div>
+  );
+}
 
 const Letter = styled.div`
   display: flex;
@@ -168,149 +294,5 @@ const Form = styled.form`
   margin: 0;
 `;
 
-function LetterDetails() {
-
-  //redux -----------------------------
-  const dispatch = useDispatch();
-  const letters = useSelector(state=>state.letters);
-
-  console.log('letters in 상세페이지', letters);
-
-  //redux -----------------------------
-
-
-  // const { letters, setLetters } = useContext(LettersContext);
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const userName = location.state.userName;
-  const createdAt = location.state.createdAt;
-  const wroteTo = location.state.wroteTo;
-  const message = location.state.message;
-  console.log('list에서 가져온객체',location.state);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedMessage, setEditedMessage] = useState(message);
-  const messageRef = useRef(message);
-  let filtered = letters?.find((item)=>item.id === id );
-  console.log('filtered',filtered);
-  
-  const deleteLetterHandler = (id) => {
-    if(window.confirm("Are you sure you want to delete the letter?") === true){
-      dispatch(deleteLetter(id));
-      // const remainedLetters = letters.filter((letter)=>{
-      //   return letter.id !== filtered.id;
-      // })
-      // console.log('remainedLetters',remainedLetters); //확인완료
-      // setLetters(remainedLetters);
-      alert("your letter has been successfully deleted!");
-      navigate("../");
-    } else {
-      return false;
-    }
-  }
-
-  if(letters.length === 0){
-    <h1>데이터가 없습니다.</h1>
-  } 
-
-  const editHandler = () => {
-    setIsEditing(!isEditing);
-    console.log('setIsEditing is...', isEditing);
-  }
-
-  useEffect(() => {
-    // focus when it is edit mode
-    if (isEditing) {
-      const messageLength = messageRef.current.value.length;
-      messageRef.current.focus();
-      //place the location of the cursor to the last
-      messageRef.current.setSelectionRange(messageLength, messageLength);
-    }
-  }, [isEditing]);
-
-  const editedTypeHandler = (event) => {
-    const editedSavedMessage = event.target.value;
-    setEditedMessage(editedSavedMessage);
-    console.log('!!!!!',editedMessage);
-    console.log('editedSavedMessage',editedSavedMessage);
-  }
-
-  const editedAddHandler = (e) => {
-    e.preventDefault();
-    // validation check
-    if(message === editedMessage){
-      alert("There is no any change");
-    } else {
-      if(window.confirm("Are you sure you want to save the changes?") !== true) {
-        return;
-      } else {
-        dispatch(editLetter(id, editedMessage));
-        // const newEditedLetters = letters.map((letter)=>
-        // letter.id === id ? {...letter, message: editedMessage}
-        //  : letter);
-        // console.log('newEditedLetters',newEditedLetters);
-        // setLetters(newEditedLetters);
-        alert("Your changes has been successfully updated!");
-        setIsEditing(false);
-      }
-    }
-
-  };
-
-  return (
-    <div>
-      {console.log("letters in detail page", letters)}
-      {/* 데이터 들어오는 것 확인 */}
-      <GlobalStyle />
-      <Header/>
-      <Main>
-        <BtnArea>
-          <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>
-        </BtnArea>
-        {isEditing? (
-          <>
-            <Letter style={{ justifyContent: 'center' }}>
-              <UserNameAndCreatedAt>
-                <UserInfo>
-                  <UserIcon />
-                  <p>{filtered.userName}</p>
-                  </UserInfo>
-                  <CreatedAt>{filtered.createdAt}</CreatedAt>
-              </UserNameAndCreatedAt>
-              <WroteTo>To: {filtered.wroteTo}</WroteTo>
-              <Form onSubmit={editedAddHandler}>
-                <Message><Textarea onChange={editedTypeHandler} ref={messageRef}>{filtered.message}</Textarea></Message>
-              </Form>
-            </Letter>
-            <EditBtnArea>
-              <Button type="submit" alt="Save Button" onClick={editedAddHandler} >Save</Button>
-              <Button alt="Cancel Button" onClick={editHandler} >Cancel</Button>
-            </EditBtnArea>
-          </>
-        ) : (
-          <>
-            <Letter>
-              <UserNameAndCreatedAt>
-                <UserInfo>
-                <UserIcon />
-                  <p>{filtered.userName}</p>
-                </UserInfo>
-                <CreatedAt>{filtered.createdAt}</CreatedAt>
-              </UserNameAndCreatedAt>
-              <WroteTo>To: {filtered.wroteTo}</WroteTo>
-              <Message>{filtered.message}</Message>
-            </Letter>
-            <EditBtnArea>
-              <Button alt="Edit Button" onClick={editHandler}>Edit</Button>
-              <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
-              <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
-            </EditBtnArea>
-          </>
-        )}  
-      </Main>
-
-    </div>
-  );
-}
-
 export default LetterDetails
+

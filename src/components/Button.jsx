@@ -61,6 +61,7 @@ function Button(){
   );
   const buttonByNameClickHandler = (item) => {
     setSelectedCharacterId(item.id);
+    console.log('선택한 아이디',item.id);
     const allFalse = 
     {
       'Paul' : false,
@@ -69,6 +70,7 @@ function Button(){
       'Lee' : false,
     };
     dispatch((setCharacter({ ...allFalse, [item.name] : true})));
+    console.log('button click!',{ ...allFalse, [item.name] : true});
     // setLetterShown({ ...allFalse, [item.name] : true});
   }
 

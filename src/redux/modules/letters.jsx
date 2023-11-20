@@ -5,6 +5,7 @@ import fakeData from 'database/fakeData.json';
 const ADD_LETTER = "letters/ADD_LETTER";
 const DELETE_LETTER = "letters/DELETE_LETTER";
 const EDIT_LETTER = "letters/EDIT_LETTER";
+// const CHOOSE_LETTER = "letters/CHOOSE_LETTER";
 
 
 export const addLetter = (payload) => {
@@ -25,6 +26,12 @@ export const editLetter = (payload) => {
     payload,
   }
 }
+// export const chooseLetter = (payload) => {
+//   return {
+//     type: CHOOSE_LETTER,
+//     payload,
+//   }
+// }
 
 const initialState = fakeData;
 
@@ -32,19 +39,22 @@ const letters = (state = initialState, action) => {
   switch (action.type){
     case ADD_LETTER:
       const newLetter = action.payload;
-      return [...state, action.payload]; //set~();
+      return [...state, newLetter]; //OK
     case DELETE_LETTER:
-      const letterId = action.payload;
-      return state.filter(letter=> letter.id !== letterId);
+      const filteredLetters = state.filter(letter => letter.id !== action.payload);
+      console.log('delete',action.payload);
+      console.log('filteredLetters',filteredLetters);
+      return filteredLetters;
     case EDIT_LETTER:
-      const  { id, editedMessage} = action.payload;
-      return state.map((letter)=> {
+      const  { id, editedMessage } = action.payload;
+      const updatedLetters = state.map((letter)=> {
         if(letter.id === id){
           return {...letter, message: editedMessage};
         } else {
           return letter;
         }
-      })
+      });
+      return updatedLetters;
     default:
       return state;
   }

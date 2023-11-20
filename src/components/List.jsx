@@ -2,7 +2,7 @@ import React from 'react'
 import {styled} from "styled-components";
 import { Link } from 'react-router-dom';
 import UserIcon from './UserIcon';
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 const ListArea = styled.div`
   overflow-y: scroll;
@@ -86,17 +86,25 @@ const ListOuterFrame = styled.div`
 `;
 
 function List() {
-  const FilteredLettersByNameContext = useSelector((state) => state.character);
+  const letterShown = useSelector((state) => state.character);
   const letters = useSelector((state)=> state.letters);
+
+  const filteredByNameList = letters.filter((letter)=>{
+    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
+    console.log('letter.wrote =>',letter.wroteTo);
+    return letterShown[letter.wroteTo];
+  })
   // const { letters } = useContext(FilteredLettersByNameContext);
 
   return (
     <ListOuterFrame>
       <ListArea>
-      {letters.length === 0 ? (
+      {console.log('분류된 편지들', filteredByNameList)}
+      {console.log('lettershown',letterShown)}
+      {filteredByNameList.length === 0 ? (
           <h4>There are no fan letters saved.<br /> Be the first one to post a fan letter!</h4>
         ) : (
-          letters.map((letter) => (
+          filteredByNameList.map((letter) => (
             <Letter
               key={letter.id}
               to={`/letter-details/${letter.id}`}

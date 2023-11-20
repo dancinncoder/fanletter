@@ -5,10 +5,10 @@ import { useState } from 'react';
 // import { useEffect } from 'react';
 // import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { useContext } from 'react';
-import { LettersContext } from 'context/LettersContext';
-import { FormAreaContext } from 'context/FormAreaContext';
-import { ButtonLetterContext } from 'context/ButtonLetterContext';
+// import { useContext } from 'react';
+// import { LettersContext } from 'context/LettersContext';
+// import { FormAreaContext } from 'context/FormAreaContext';
+// import { ButtonLetterContext } from 'context/ButtonLetterContext';
 // import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
 // CSS
 import { styled } from 'styled-components';
@@ -77,42 +77,24 @@ const LetterInputOutputArea = styled.div`
 
 function Home() {
 
-  //redux -----------------------------
   const letters = useSelector((state)=>{
     return state.letters;
   });
 
-  console.log('letters', letters); // 초기값 빈배열 []
-
-  //redux -----------------------------
-
-  // const {letters, setLetters} = useContext(LettersContext);
-  // console.log('letters at home', letters); // 데이터 들어오는 거 확인
-
-  const [letterShown, setLetterShown] = useState({
-    'Paul' : true,
-    'Elio' : false,
-    'Gatsby' : false,
-    'Lee' : false,
-  });
-  // const [createdAt, setCreatedAt] = useState("");
-
-  // const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
-  // useEffect(()=> {
-  //   // GET CURRNET DATE & TIME
-  //   const now = moment();
-  //   // FORMATTING
-  //   const formattedTime = now.format('YY-MM-DD HH:mm:');
-  //   setCreatedAt(formattedTime);
-  // },[])
-
-  // const userNameRef = useRef('');
-  // useEffect(()=> {
-  //   userNameRef.current.focus();
-  // })
+  const letterShown = useSelector((state)=>{
+    console.log('lettershown state character', state.character);
+    return state.character;
+  })
+  // const [letterShown, setLetterShown] = useState({
+  //   'Paul' : true,
+  //   'Elio' : false,
+  //   'Gatsby' : false,
+  //   'Lee' : false,
+  // });
 
   const filteredByName = letters.filter((letter)=>{
+    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
+    console.log('letter.wrote =>',letter.wroteTo);
     return letterShown[letter.wroteTo];
   })
 
@@ -127,20 +109,11 @@ function Home() {
         <LetterInputOutputArea>
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
-          {/* <FormAreaContext.Provider value={{createdAt, userNameRef}}> */}
-            <FormArea />
-          {/* </FormAreaContext.Provider> */}
-          {/* <List letters={letters.filter((letter)=>{
-            return letterShown[letter.wroteTo];  
-          })}/> */}
+          <FormArea />
           {/* <List letters={filteredByName}/> */}
-          {/* <FilteredLettersByNameContext.Provider value={{ letters : filteredByName}}> */}
-              <List letters={filteredByName}/>
-          {/* </FilteredLettersByNameContext.Provider> */}
+          <List />
         </LetterInputOutputArea>
-        {/* <ButtonLetterContext.Provider value={{letterShown, setLetterShown}}> */}
-          <Button />
-        {/* </ButtonLetterContext.Provider> */}
+        <Button />
       </Main>
       <Footer />
     </OuterFrame>

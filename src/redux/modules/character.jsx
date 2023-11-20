@@ -18,6 +18,7 @@ const character = (state = initialState, action) => {
   switch (action.type){
     case  SET_CHARACTER:
       const letterShown = action.payload;
+      console.log('letterShown',letterShown);
       return letterShown;
     default:
       return state;
