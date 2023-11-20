@@ -1,11 +1,7 @@
-// letters.jsx 에는 letter에 대한 state들이 모여있다.
-import uuid from 'react-uuid';
-import moment from 'moment';
 import fakeData from 'database/fakeData.json';
 const ADD_LETTER = "letters/ADD_LETTER";
 const DELETE_LETTER = "letters/DELETE_LETTER";
 const EDIT_LETTER = "letters/EDIT_LETTER";
-// const CHOOSE_LETTER = "letters/CHOOSE_LETTER";
 
 
 export const addLetter = (payload) => {
@@ -26,12 +22,6 @@ export const editLetter = (payload) => {
     payload,
   }
 }
-// export const chooseLetter = (payload) => {
-//   return {
-//     type: CHOOSE_LETTER,
-//     payload,
-//   }
-// }
 
 const initialState = fakeData;
 
@@ -42,8 +32,6 @@ const letters = (state = initialState, action) => {
       return [...state, newLetter]; //OK
     case DELETE_LETTER:
       const filteredLetters = state.filter(letter => letter.id !== action.payload);
-      console.log('delete',action.payload);
-      console.log('filteredLetters',filteredLetters);
       return filteredLetters;
     case EDIT_LETTER:
       const  { id, editedMessage } = action.payload;

@@ -1,50 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
-import { ButtonLetterContext } from 'context/ButtonLetterContext';
-import { useContext } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { setCharacter } from 'redux/modules/character';
-
-const ButtonBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-const ButtonI = styled.button`
-  font-weight: 500;
-  width: 15%;
-  height: 100px;
-  background-color: black;
-  color: white;
-  font-size: 1.3rem;
-  border: none;
-  display: block;
-  position: fixed;
-  right: 0;
-  cursor: pointer;
-  transition: 0.2s ease;
-  &:hover {
-    background-color: #343434;
-    color: white;
-  }
-  &:first-child {
-    bottom: 55%;
-  }
-  &:nth-child(2){
-    bottom: 43%;
-  }
-  &:nth-child(3){
-    bottom: 31%;
-  }
-  &:nth-child(4){
-    bottom: 19%;
-  }
-  background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? '#343434' : 'black')};
-  color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'white')};
-`;
 
 function Button(){
   const letterShown = useSelector(state => state.character);
@@ -87,3 +45,45 @@ function Button(){
 }
 
 export default Button
+
+const ButtonBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const ButtonI = styled.button`
+  font-weight: 500;
+  width: 15%;
+  height: 100px;
+  background-color: black;
+  color: white;
+  font-size: 1.3rem;
+  border: none;
+  display: block;
+  position: fixed;
+  right: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+  &:hover {
+    background-color: #343434;
+    color: white;
+  }
+  &:first-child {
+    bottom: 55%;
+  }
+  &:nth-child(2){
+    bottom: 43%;
+  }
+  &:nth-child(3){
+    bottom: 31%;
+  }
+  &:nth-child(4){
+    bottom: 19%;
+  }
+  background-color: ${(props) => (props.selectedCharacterId === props.buttonId ? '#343434' : 'black')};
+  color: ${(props) => (props.selectedCharacterId === props.buttonId ? 'white' : 'white')};
+`;
+
+

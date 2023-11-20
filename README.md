@@ -54,6 +54,7 @@ Redux
 
 Copy and paste on the web browser to check the deployment result.
 ```
+https://reduxfanletter.vercel.app/
 
 ```
 

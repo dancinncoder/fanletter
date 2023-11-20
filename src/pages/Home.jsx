@@ -1,27 +1,58 @@
 // Hooks
 import React from 'react';
 import { useState } from 'react';
-// import moment from 'moment';
-// import { useEffect } from 'react';
-// import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-// import { useContext } from 'react';
-// import { LettersContext } from 'context/LettersContext';
-// import { FormAreaContext } from 'context/FormAreaContext';
-// import { ButtonLetterContext } from 'context/ButtonLetterContext';
-// import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
-// CSS
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
-// Components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
 import FormArea from '../components/FormArea';
-// Image
 import picturePaul from '../assets/dune-Paul.png';
 import { useSelector } from 'react-redux';
+
+
+function Home() {
+
+  const letters = useSelector((state)=>{
+    return state.letters;
+  });
+
+  const letterShown = useSelector((state)=>{
+    console.log('lettershown state character', state.character);
+    return state.character;
+  })
+
+  const filteredByName = letters.filter((letter)=>{
+    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
+    console.log('letter.wrote =>',letter.wroteTo);
+    return letterShown[letter.wroteTo];
+  })
+
+  return (
+    <OuterFrame>
+      <GlobalStyle />
+      <Header />
+      <Main>
+        <ImgBtnBox>
+          <PicturePaul src={picturePaul} alt="Paul picture"/>
+        </ImgBtnBox>
+        <LetterInputOutputArea>
+          <h1>Send My Letter</h1>
+          <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
+          <FormArea />
+          {/* <List letters={filteredByName}/> */}
+          <List />
+        </LetterInputOutputArea>
+        <Button />
+      </Main>
+      <Footer />
+    </OuterFrame>
+  );
+}
+
+export default Home;
 
 const OuterFrame = styled.div`
   display: flex;
@@ -75,49 +106,4 @@ const LetterInputOutputArea = styled.div`
   }
 `;
 
-function Home() {
 
-  const letters = useSelector((state)=>{
-    return state.letters;
-  });
-
-  const letterShown = useSelector((state)=>{
-    console.log('lettershown state character', state.character);
-    return state.character;
-  })
-  // const [letterShown, setLetterShown] = useState({
-  //   'Paul' : true,
-  //   'Elio' : false,
-  //   'Gatsby' : false,
-  //   'Lee' : false,
-  // });
-
-  const filteredByName = letters.filter((letter)=>{
-    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
-    console.log('letter.wrote =>',letter.wroteTo);
-    return letterShown[letter.wroteTo];
-  })
-
-  return (
-    <OuterFrame>
-      <GlobalStyle />
-      <Header />
-      <Main>
-        <ImgBtnBox>
-          <PicturePaul src={picturePaul} alt="Paul picture"/>
-        </ImgBtnBox>
-        <LetterInputOutputArea>
-          <h1>Send My Letter</h1>
-          <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
-          <FormArea />
-          {/* <List letters={filteredByName}/> */}
-          <List />
-        </LetterInputOutputArea>
-        <Button />
-      </Main>
-      <Footer />
-    </OuterFrame>
-  );
-}
-
-export default Home;

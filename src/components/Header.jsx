@@ -2,6 +2,19 @@ import React from 'react'
 import {styled} from "styled-components";
 import { useNavigate } from 'react-router-dom';
 
+function Header() {
+
+  const navigate = useNavigate();
+
+  return (
+    <HeaderArea>
+      <GoHomeBtn onClick={()=> {navigate("../")}}>Home</GoHomeBtn>
+    </HeaderArea>
+  )
+}
+
+export default Header
+
 const HeaderArea = styled.header`
   display: flex;
   flex-direction: column;
@@ -34,15 +47,4 @@ const GoHomeBtn = styled.button`
   }
 `;
 
-function Header() {
 
-  const navigate = useNavigate();
-
-  return (
-    <HeaderArea>
-      <GoHomeBtn onClick={()=> {navigate("../")}}>Home</GoHomeBtn>
-    </HeaderArea>
-  )
-}
-
-export default Header

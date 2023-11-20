@@ -4,84 +4,14 @@ import {useState} from 'react';
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
 import moment from 'moment';
-import { FormAreaContext } from 'context/FormAreaContext';
-import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from 'redux/modules/letters';
 import { useRef } from 'react';
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #000000;
-  //아래가 후
-  width: 90%;
-  height: 120px;
-  border-radius: 20px;
-  margin: 20px;
-  background-color: #f2f2f2;
-  padding: 10px;
-`;
-
-const MessageInput = styled.input`
-  width: 90%;
-  border: none;
-`;
-
-const UserNameInput = styled.input`
-  width: 100%;
-  border: none;
-`;
-
-const SendButton = styled.button`
-  background-color: white;
-  border: 1px solid black;
-  height: 40px;
-  width: 100%;
-  border: none;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: 0.2s ease;
-  &:hover {
-    background-color: black;
-    color: white;
-    transform: scale(1.004);
-  }
-`;
-
-const ToUserName = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 85%;
-  gap: 10px;
-  height: 20px;
-  margin: 2px 20px 2px 20px;
-`;
-
-const MessageBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  gap: 10px;
-  margin: 2px 20px 2px 20px;
-`;
 
 function FormArea() {
-//redux -----------------------------
   const dispatch = useDispatch();
   const letters = useSelector(state => state.letters);
-//redux -----------------------------
-
-
-
-  // const { createdAt, userNameRef } = useContext(FormAreaContext);
-  // const { letters, setLetters } = useContext(LettersContext);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [wroteTo, setWroteTo] = useState("");
@@ -107,13 +37,10 @@ function FormArea() {
     setCreatedAt(formattedTime);
   },[])
 
-
-
   const userNameRef = useRef('');
   useEffect(()=> {
     userNameRef.current.focus();
   })
-
 
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {
@@ -192,5 +119,67 @@ function FormArea() {
   )
  }
 
+ export default FormArea
 
-export default FormArea
+ const Form = styled.form`
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ gap: 10px;
+ font-size: 1rem;
+ font-weight: 600;
+ color: #000000;
+ //아래가 후
+ width: 90%;
+ height: 120px;
+ border-radius: 20px;
+ margin: 20px;
+ background-color: #f2f2f2;
+ padding: 10px;
+`;
+
+const MessageInput = styled.input`
+ width: 90%;
+ border: none;
+`;
+
+const UserNameInput = styled.input`
+ width: 100%;
+ border: none;
+`;
+
+const SendButton = styled.button`
+ background-color: white;
+ border: 1px solid black;
+ height: 40px;
+ width: 100%;
+ border: none;
+ cursor: pointer;
+ border-radius: 20px;
+ transition: 0.2s ease;
+ &:hover {
+   background-color: black;
+   color: white;
+   transform: scale(1.004);
+ }
+`;
+
+const ToUserName = styled.div`
+ display: flex;
+ flex-direction: row;
+ justify-content: flex-start;
+ align-items: center;
+ width: 85%;
+ gap: 10px;
+ height: 20px;
+ margin: 2px 20px 2px 20px;
+`;
+
+const MessageBox = styled.div`
+ display: flex;
+ flex-direction: row;
+ justify-content: start;
+ gap: 10px;
+ margin: 2px 20px 2px 20px;
+`;
+

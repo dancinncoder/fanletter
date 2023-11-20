@@ -12,9 +12,6 @@ import { deleteLetter, editLetter } from 'redux/modules/letters';
 function LetterDetails() {
   const dispatch = useDispatch();
   const letters = useSelector(state=>state.letters);
-
-  console.log('letters in 상세페이지', letters);
-
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,7 +19,6 @@ function LetterDetails() {
   const createdAt = location.state.createdAt;
   const wroteTo = location.state.wroteTo;
   const message = location.state.message;
-  console.log('list에서 가져온객체',location.state);
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const messageRef = useRef(message);
@@ -32,7 +28,6 @@ function LetterDetails() {
   
   const deleteLetterHandler = () => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
-      console.log('선택한id', id);// 여기 아이디가 문제
       dispatch(deleteLetter(id));
       alert("your letter has been successfully deleted!");
       navigate("../");
@@ -40,10 +35,6 @@ function LetterDetails() {
       return false;
     }
   }
-
-  if(letters.length === 0){
-    <h1>데이터가 없습니다.</h1>
-  } 
 
   const editHandler = () => {
     setIsEditing(!isEditing);
@@ -65,18 +56,18 @@ function LetterDetails() {
     setEditedMessage(editedSavedMessage);
   }
 
-  const editedAddHandler = (e) => {
-    e.preventDefault();
+  const editedAddHandler = (event) => {
+    event.preventDefault();
     // validation check
     if(message === editedMessage){
       alert("There is no any change");
     } else {
-      if(window.confirm("Are you sure you want to save the changes?") !== true) {
-        return;
-      } else {
-        dispatch(editLetter(id, editedMessage));
+      if(window.confirm("Are you sure you want to save the changes?") === true) {
+        dispatch(editLetter({id, editedMessage}));
         alert("Your changes has been successfully updated!");
         setIsEditing(false);
+      } else {
+        return;
       }
     }
 
@@ -220,6 +211,8 @@ const Button = styled.button`
   }
 `;
 
+export default LetterDetails
+
 const UserNameAndCreatedAt = styled.div`
   display: flex;
   flex-direction: row;
@@ -294,5 +287,4 @@ const Form = styled.form`
   margin: 0;
 `;
 
-export default LetterDetails
 

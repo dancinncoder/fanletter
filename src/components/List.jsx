@@ -4,6 +4,51 @@ import { Link } from 'react-router-dom';
 import UserIcon from './UserIcon';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
+
+function List() {
+  const letterShown = useSelector((state) => state.character);
+  const letters = useSelector((state)=> state.letters);
+
+  const filteredByNameList = letters.filter((letter)=>{
+    return letterShown[letter.wroteTo];
+  })
+
+  return (
+    <ListOuterFrame>
+      <ListArea>
+      {filteredByNameList.length === 0 ? (
+          <h4>There are no fan letters saved.<br /> Be the first one to post a fan letter!</h4>
+        ) : (
+          filteredByNameList.map((letter) => (
+            <Letter
+              key={letter.id}
+              to={`/letter-details/${letter.id}`}
+              state={{
+                userName: letter.userName,
+                createdAt: letter.createdAt,
+                wroteTo: letter.wroteTo,
+                message: letter.message,
+              }}
+            >
+              <UserIcon />
+              <LetterContent>
+                <UserName>{letter.userName}</UserName>
+                <p>{letter.createdAt}</p>
+                <span>{letter.wroteTo},&nbsp;</span>
+                <Message>{letter.message}</Message>
+              </LetterContent>
+            </Letter>
+          ))
+        )}
+      </ListArea>
+    </ListOuterFrame>
+
+  )
+}
+
+export default List
+
+
 const ListArea = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
@@ -84,51 +129,3 @@ const ListOuterFrame = styled.div`
   background-color: #f2f2f2;
   padding: 10px;
 `;
-
-function List() {
-  const letterShown = useSelector((state) => state.character);
-  const letters = useSelector((state)=> state.letters);
-
-  const filteredByNameList = letters.filter((letter)=>{
-    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
-    console.log('letter.wrote =>',letter.wroteTo);
-    return letterShown[letter.wroteTo];
-  })
-  // const { letters } = useContext(FilteredLettersByNameContext);
-
-  return (
-    <ListOuterFrame>
-      <ListArea>
-      {console.log('분류된 편지들', filteredByNameList)}
-      {console.log('lettershown',letterShown)}
-      {filteredByNameList.length === 0 ? (
-          <h4>There are no fan letters saved.<br /> Be the first one to post a fan letter!</h4>
-        ) : (
-          filteredByNameList.map((letter) => (
-            <Letter
-              key={letter.id}
-              to={`/letter-details/${letter.id}`}
-              state={{
-                userName: letter.userName,
-                createdAt: letter.createdAt,
-                wroteTo: letter.wroteTo,
-                message: letter.message,
-              }}
-            >
-              <UserIcon />
-              <LetterContent>
-                <UserName>{letter.userName}</UserName>
-                <p>{letter.createdAt}</p>
-                <span>{letter.wroteTo},&nbsp;</span>
-                <Message>{letter.message}</Message>
-              </LetterContent>
-            </Letter>
-          ))
-        )}
-      </ListArea>
-    </ListOuterFrame>
-
-  )
-}
-
-export default List
