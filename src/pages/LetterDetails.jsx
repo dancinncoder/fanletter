@@ -32,8 +32,6 @@ const Main = styled.div`
 `;
 
 const GoHomeBtn2 = styled.img`
-  /* height: 90vh; */
-  /* max-height: 90%; */
   display: block;
   position: absolute;
   left: 0;
@@ -54,7 +52,6 @@ const BtnArea = styled.div`
   width: 30%;
   height: 90%;
   overflow-y: hidden;
-  /* z-index: 0; */
 `;
 
 const EditBtnArea = styled.div`
@@ -167,28 +164,21 @@ const Form = styled.form`
 
 function LetterDetails({letters, setLetters}) {
   const { id } = useParams();
-
-;
-  
-
   const navigate = useNavigate();
   const location = useLocation();
   const userName = location.state.userName;
   const createdAt = location.state.createdAt;
   const wroteTo = location.state.wroteTo;
   const message = location.state.message;
-  console.log('list에서 가져온객체',location.state);
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const messageRef = useRef(message);
   let filtered = letters?.find((item)=>item.id === id );
-  console.log('filtered',filtered);
   const deleteLetterHandler = (id) => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
       const remainedLetters = letters.filter((letter)=>{
         return letter.id !== filtered.id;
       })
-      console.log('remainedLetters',remainedLetters); //확인완료
       setLetters(remainedLetters);
       alert("your letter has been successfully deleted!");
       navigate("../");
@@ -197,13 +187,8 @@ function LetterDetails({letters, setLetters}) {
     }
   }
 
-  if(letters.length === 0){
-    <h1>데이터가 없습니다.</h1>
-  } 
-
   const editHandler = () => {
     setIsEditing(!isEditing);
-    console.log('setIsEditing is...', isEditing);
   }
 
   useEffect(() => {
@@ -219,8 +204,6 @@ function LetterDetails({letters, setLetters}) {
   const editedTypeHandler = (event) => {
     const editedSavedMessage = event.target.value;
     setEditedMessage(editedSavedMessage);
-    console.log('!!!!!',editedMessage);
-    console.log('editedSavedMessage',editedSavedMessage);
   }
 
   const editedAddHandler = (e) => {
@@ -235,7 +218,6 @@ function LetterDetails({letters, setLetters}) {
         const newEditedLetters = letters.map((letter)=>
         letter.id === id ? {...letter, message: editedMessage}
          : letter);
-        console.log('newEditedLetters',newEditedLetters);
         setLetters(newEditedLetters);
         alert("Your changes has been successfully updated!");
         setIsEditing(false);

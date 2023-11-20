@@ -1,20 +1,19 @@
-// Hooks
 import React from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-// CSS
+
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
-// Components
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
 import FormArea from '../components/FormArea';
-// Image
+
 import picturePaul from '../assets/dune-Paul.png';
 
 const OuterFrame = styled.div`
@@ -96,7 +95,6 @@ function Home({letters, setLetters}) {
 
   return (
     <OuterFrame>
-      {console.log("letters in home", letters)}
       <GlobalStyle />
       <Header letters={letters} setLetters={setLetters} userNameRef={userNameRef}/>
       <Main>

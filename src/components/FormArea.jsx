@@ -86,7 +86,6 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {
     setFormValue(selectedCharacter);
-    console.log('최초 selected name is :',selectedCharacter);
   },[]);
 
   // SELECTING OPTION SETTING
@@ -107,7 +106,6 @@ function FormArea({letters, setLetters, createdAt, setCreatedAt, userNameRef}) {
     event.preventDefault();
     const newLetter = {id: uuid(), userName: userName, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
     }
-    console.log('입력값으로 만들어진 객체',newLetter);
     const userNameLength = userName.trim().length;
     const messageLength = message.trim().length;
 

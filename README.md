@@ -33,30 +33,27 @@ Props-drilling
 
 ## Requirement
 
-1. If users fill out Todo title/content input blank and click the 'add' button, all input blanks should be empty to be ready to fill out them again.
-2. When the state of 'isDone' is true, the right button in the card in each 'working' and 'done' lists area should render 'cancel' string on, otherwise it should render 'done' string on.
-3. All the cards should be placed in certain area(working/done) depends their status.
-4. The Layout of the website should be maximum 1200px long width, and minimum 800ps long width. Main content should be align in center.
+1. Fan Letter Create/Read/Update/Delete
+2. Show Fan Letter Lists Categorized by Movie Character of Timothee Chalamet Played in Roles
+3. Post Fan Letter with The Character of Users' Choice
+4. Show A Fan Letter Details on Details Page
 
 ## Component Overview
-1. Layout : overall layout of the application which contains Header component
-2. Header : header that includes main logo(string type)
-3. Input : Input area where there are Todo Card title and its content input box
-4. Submit : 'add' button, and it connects to the card display area by onClick
-5. List : Card area where cards can be displayed in row direction
-6. CardDone : Card that is set to done status
-7. CardWorking: Card that is set to working status
-8. App : main application
-
-## Code Overview
+1. Header : header that includes home logo(string type)
+2. FormArea : Input area where there are Fan Letter username, and message input box and 'to whom' select sections.
+3. List : the display area of letters sorted by the receiver
+4. UserIcon: user icon for each letter
+5. Footer : Footer
 
 ## Service Overview
+![fan-letter-video-gif](https://github.com/dancinncoder/fanletter/assets/127386988/94d7afe4-443a-43fc-86fc-4573c044d67c)
+
 
 ## Deployment
 
 Copy and paste on the web browser to check the deployment result.
 ```
-https://todo-list-react-apgs5e29l-hamin-lees-projects.vercel.app/
+https://fanletter.vercel.app/
 ```
 
 ## Built With

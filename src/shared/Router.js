@@ -11,7 +11,6 @@ function Router() {
   useEffect(()=>{
     const lettersData = require("../database/fakeData.json");
     setLetters(lettersData);
-    console.log('letters In useEffect',lettersData);
   },[])
 
   // useEffect(()=>{
@@ -32,7 +31,6 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home letters={letters} setLetters={setLetters}/>}/>
-        {/* <Route path="letter-details" element={<LetterDetails />}/> */}
         <Route path="letter-details/:id" element={<LetterDetails letters={letters} setLetters={setLetters}/>}/>
       </Routes>
     </BrowserRouter>
