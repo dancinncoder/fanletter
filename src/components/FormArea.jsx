@@ -8,6 +8,7 @@ import { FormAreaContext } from 'context/FormAreaContext';
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from 'redux/modules/letters';
+import { useRef } from 'react';
 
 const Form = styled.form`
   display: flex;
@@ -76,12 +77,16 @@ function FormArea() {
   const dispatch = useDispatch();
   const letters = useSelector(state => state.letters);
 //redux -----------------------------
-  const { createdAt, userNameRef } = useContext(FormAreaContext);
+
+
+
+  // const { createdAt, userNameRef } = useContext(FormAreaContext);
   // const { letters, setLetters } = useContext(LettersContext);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [wroteTo, setWroteTo] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState("Paul");
+  const [createdAt, setCreatedAt] = useState("");
   const [formValue, setFormValue] = useState({
     id: uuid(), userName: userName, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
   });
@@ -91,6 +96,24 @@ function FormArea() {
   const messageTypeHandler = (event) => {
     setMessage(event.target.value);
   }
+
+  const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+
+  useEffect(()=> {
+    // GET CURRNET DATE & TIME
+    const now = moment();
+    // FORMATTING
+    const formattedTime = now.format('YY-MM-DD HH:mm:');
+    setCreatedAt(formattedTime);
+  },[])
+
+
+
+  const userNameRef = useRef('');
+  useEffect(()=> {
+    userNameRef.current.focus();
+  })
+
 
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {

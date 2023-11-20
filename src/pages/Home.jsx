@@ -1,9 +1,9 @@
 // Hooks
 import React from 'react';
 import { useState } from 'react';
-import moment from 'moment';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+// import moment from 'moment';
+// import { useEffect } from 'react';
+// import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { LettersContext } from 'context/LettersContext';
@@ -95,22 +95,22 @@ function Home() {
     'Gatsby' : false,
     'Lee' : false,
   });
-  const [createdAt, setCreatedAt] = useState("");
+  // const [createdAt, setCreatedAt] = useState("");
 
-  const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  // const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
-  useEffect(()=> {
-    // GET CURRNET DATE & TIME
-    const now = moment();
-    // FORMATTING
-    const formattedTime = now.format('YY-MM-DD HH:mm:');
-    setCreatedAt(formattedTime);
-  },[])
+  // useEffect(()=> {
+  //   // GET CURRNET DATE & TIME
+  //   const now = moment();
+  //   // FORMATTING
+  //   const formattedTime = now.format('YY-MM-DD HH:mm:');
+  //   setCreatedAt(formattedTime);
+  // },[])
 
-  const userNameRef = useRef('');
-  useEffect(()=> {
-    userNameRef.current.focus();
-  })
+  // const userNameRef = useRef('');
+  // useEffect(()=> {
+  //   userNameRef.current.focus();
+  // })
 
   const filteredByName = letters.filter((letter)=>{
     return letterShown[letter.wroteTo];
@@ -127,9 +127,9 @@ function Home() {
         <LetterInputOutputArea>
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
-          <FormAreaContext.Provider value={{createdAt, userNameRef}}>
+          {/* <FormAreaContext.Provider value={{createdAt, userNameRef}}> */}
             <FormArea />
-          </FormAreaContext.Provider>
+          {/* </FormAreaContext.Provider> */}
           {/* <List letters={letters.filter((letter)=>{
             return letterShown[letter.wroteTo];  
           })}/> */}
@@ -138,9 +138,9 @@ function Home() {
               <List letters={filteredByName}/>
           {/* </FilteredLettersByNameContext.Provider> */}
         </LetterInputOutputArea>
-        <ButtonLetterContext.Provider value={{letterShown, setLetterShown}}>
+        {/* <ButtonLetterContext.Provider value={{letterShown, setLetterShown}}> */}
           <Button />
-        </ButtonLetterContext.Provider>
+        {/* </ButtonLetterContext.Provider> */}
       </Main>
       <Footer />
     </OuterFrame>
