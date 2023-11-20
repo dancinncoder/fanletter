@@ -54,7 +54,7 @@ Context API
 
 Copy and paste on the web browser to check the deployment result.
 ```
-https://fanletter.vercel.app/
+https://contextfanletter.vercel.app/
 ```
 
 ## Built With
