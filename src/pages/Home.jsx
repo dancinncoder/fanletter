@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { LettersContext } from 'context/LettersContext';
 import { FormAreaContext } from 'context/FormAreaContext';
 import { ButtonLetterContext } from 'context/ButtonLetterContext';
-import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
+// import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
 // CSS
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
@@ -21,6 +21,7 @@ import Button from '../components/Button';
 import FormArea from '../components/FormArea';
 // Image
 import picturePaul from '../assets/dune-Paul.png';
+import { useSelector } from 'react-redux';
 
 const OuterFrame = styled.div`
   display: flex;
@@ -75,8 +76,18 @@ const LetterInputOutputArea = styled.div`
 `;
 
 function Home() {
-  const {letters, setLetters} = useContext(LettersContext);
-  console.log('letters at home', letters); // 데이터 들어오는 거 확인
+
+  //redux -----------------------------
+  const letters = useSelector((state)=>{
+    return state.letters;
+  });
+
+  console.log('letters', letters); // 초기값 빈배열 []
+
+  //redux -----------------------------
+
+  // const {letters, setLetters} = useContext(LettersContext);
+  // console.log('letters at home', letters); // 데이터 들어오는 거 확인
 
   const [letterShown, setLetterShown] = useState({
     'Paul' : true,
@@ -123,9 +134,9 @@ function Home() {
             return letterShown[letter.wroteTo];  
           })}/> */}
           {/* <List letters={filteredByName}/> */}
-          <FilteredLettersByNameContext.Provider value={{ letters : filteredByName}}>
-              <List />
-          </FilteredLettersByNameContext.Provider>
+          {/* <FilteredLettersByNameContext.Provider value={{ letters : filteredByName}}> */}
+              <List letters={filteredByName}/>
+          {/* </FilteredLettersByNameContext.Provider> */}
         </LetterInputOutputArea>
         <ButtonLetterContext.Provider value={{letterShown, setLetterShown}}>
           <Button />

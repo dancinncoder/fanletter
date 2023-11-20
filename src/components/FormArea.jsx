@@ -7,6 +7,8 @@ import moment from 'moment';
 import { LettersContext } from 'context/LettersContext';
 import { FormAreaContext } from 'context/FormAreaContext';
 import { useContext } from 'react';
+import { addLetter } from 'redux/modules/letters';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Form = styled.form`
   display: flex;
@@ -71,8 +73,12 @@ const MessageBox = styled.div`
 `;
 
 function FormArea() {
+//redux -----------------------------
+  const dispatch = useDispatch();
+  const letters = useSelector(state => state.letters);
+//redux -----------------------------
   const { createdAt, userNameRef } = useContext(FormAreaContext);
-  const { letters, setLetters } = useContext(LettersContext);
+  // const { letters, setLetters } = useContext(LettersContext);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [wroteTo, setWroteTo] = useState("");
@@ -109,37 +115,69 @@ function FormArea() {
   // NEW LETTER ADD
   const addHandler = (event) => {
     event.preventDefault();
-    const newLetter = {id: uuid(), userName: userName, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
-    }
+    const newLetter = {id: uuid(), userName: userName, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,}
     console.log('입력값으로 만들어진 객체',newLetter);
     const userNameLength = userName.trim().length;
     const messageLength = message.trim().length;
-
     // validation check
     if (userNameLength === 0 || messageLength === 0) {
-      alert("Please fill out the blank");
-      return;
-    } else if (userNameLength > 20) { 
-      alert("Please write your usernmae within 20 characters.");
-      return;
-    } else if (messageLength > 100) {
-      alert("Please write your message within 100 characters.");
-      return;
-    } else if (/^\s*$/.test(userName) || /^\s*$/.test(message)) {
-      alert("Only spaces have been entered.");
-      return;
-    } else {
-      if(window.confirm("Are you sure you want to send the letter?") === true){
-        setLetters([...letters, newLetter]);
-        alert("Your letter has been successfully sent!");
+        alert("Please fill out the blank");
+        return;
+      } else if (userNameLength > 20) { 
+        alert("Please write your usernmae within 20 characters.");
+        return;
+      } else if (messageLength > 100) {
+        alert("Please write your message within 100 characters.");
+        return;
+      } else if (/^\s*$/.test(userName) || /^\s*$/.test(message)) {
+        alert("Only spaces have been entered.");
+        return;
       } else {
-        return false;
-      }
-      // input box init
+        if(window.confirm("Are you sure you want to send the letter?") === true){
+          // setLetters([...letters, newLetter]);
+          dispatch(addLetter(newLetter));
+          console.log('디스패치',addLetter(newLetter));
+          alert("Your letter has been successfully sent!");
+        } else {
+          return false;
+        }
+        // input box init
         setUserName("");
         setMessage("");
-    }
-  }
+      }
+  // const addHandler = (event) => {
+  //   event.preventDefault();
+  //   const newLetter = {id: uuid(), userName: userName, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
+  //   }
+  //   console.log('입력값으로 만들어진 객체',newLetter);
+  //   const userNameLength = userName.trim().length;
+  //   const messageLength = message.trim().length;
+
+  //   // validation check
+  //   if (userNameLength === 0 || messageLength === 0) {
+  //     alert("Please fill out the blank");
+  //     return;
+  //   } else if (userNameLength > 20) { 
+  //     alert("Please write your usernmae within 20 characters.");
+  //     return;
+  //   } else if (messageLength > 100) {
+  //     alert("Please write your message within 100 characters.");
+  //     return;
+  //   } else if (/^\s*$/.test(userName) || /^\s*$/.test(message)) {
+  //     alert("Only spaces have been entered.");
+  //     return;
+  //   } else {
+  //     if(window.confirm("Are you sure you want to send the letter?") === true){
+  //       setLetters([...letters, newLetter]);
+  //       alert("Your letter has been successfully sent!");
+  //     } else {
+  //       return false;
+  //     }
+  //     // input box init
+  //       setUserName("");
+  //       setMessage("");
+  //   }
+  // }
 
   return (
     <Form onSubmit={addHandler}>
@@ -161,6 +199,7 @@ function FormArea() {
     <SendButton type="submit">Send</SendButton>
   </Form>
   )
+ }
 }
 
 export default FormArea

@@ -8,6 +8,7 @@ import Header from 'components/Header';
 import { useState } from 'react';
 import { LettersContext } from 'context/LettersContext';
 import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Letter = styled.div`
   display: flex;
@@ -168,7 +169,18 @@ const Form = styled.form`
 `;
 
 function LetterDetails() {
-  const { letters, setLetters } = useContext(LettersContext);
+
+  //redux -----------------------------
+  const letters = useSelector((state)=>{
+    return state.letters;
+  });
+
+  console.log('letters in 상세페이지', letters);
+
+  //redux -----------------------------
+
+
+  // const { letters, setLetters } = useContext(LettersContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
