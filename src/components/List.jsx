@@ -89,7 +89,6 @@ const ListOuterFrame = styled.div`
 
 function List() {
   const { letters } = useContext(FilteredLettersByNameContext);
-  console.log('filtered letters in list', letters);
   return (
     <ListOuterFrame>
       <ListArea>

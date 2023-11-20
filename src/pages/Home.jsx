@@ -1,4 +1,3 @@
-// Hooks
 import React from 'react';
 import { useState } from 'react';
 import moment from 'moment';
@@ -10,16 +9,13 @@ import { LettersContext } from 'context/LettersContext';
 import { FormAreaContext } from 'context/FormAreaContext';
 import { ButtonLetterContext } from 'context/ButtonLetterContext';
 import { FilteredLettersByNameContext } from 'context/FilteredLettersByNameContext';
-// CSS
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
-// Components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Button from '../components/Button';
 import FormArea from '../components/FormArea';
-// Image
 import picturePaul from '../assets/dune-Paul.png';
 
 const OuterFrame = styled.div`
@@ -76,7 +72,6 @@ const LetterInputOutputArea = styled.div`
 
 function Home() {
   const {letters, setLetters} = useContext(LettersContext);
-  console.log('letters at home', letters); // 데이터 들어오는 거 확인
 
   const [letterShown, setLetterShown] = useState({
     'Paul' : true,
@@ -119,10 +114,6 @@ function Home() {
           <FormAreaContext.Provider value={{createdAt, userNameRef}}>
             <FormArea />
           </FormAreaContext.Provider>
-          {/* <List letters={letters.filter((letter)=>{
-            return letterShown[letter.wroteTo];  
-          })}/> */}
-          {/* <List letters={filteredByName}/> */}
           <FilteredLettersByNameContext.Provider value={{ letters : filteredByName}}>
               <List />
           </FilteredLettersByNameContext.Provider>

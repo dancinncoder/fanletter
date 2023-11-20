@@ -10,7 +10,6 @@ function App() {
   useEffect(()=>{
     const lettersData = require("../src/database/fakeData.json");
     setLetters(lettersData);
-    console.log('letters In useEffect',lettersData);
   },[])
 
   // useEffect(()=>{

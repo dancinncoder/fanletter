@@ -56,7 +56,6 @@ const BtnArea = styled.div`
   width: 30%;
   height: 90%;
   overflow-y: hidden;
-  /* z-index: 0; */
 `;
 
 const EditBtnArea = styled.div`
@@ -176,18 +175,15 @@ function LetterDetails() {
   const createdAt = location.state.createdAt;
   const wroteTo = location.state.wroteTo;
   const message = location.state.message;
-  console.log('list에서 가져온객체',location.state);
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const messageRef = useRef(message);
   let filtered = letters?.find((item)=>item.id === id );
-  console.log('filtered',filtered);
   const deleteLetterHandler = (id) => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
       const remainedLetters = letters.filter((letter)=>{
         return letter.id !== filtered.id;
       })
-      console.log('remainedLetters',remainedLetters); //확인완료
       setLetters(remainedLetters);
       alert("your letter has been successfully deleted!");
       navigate("../");
@@ -202,7 +198,6 @@ function LetterDetails() {
 
   const editHandler = () => {
     setIsEditing(!isEditing);
-    console.log('setIsEditing is...', isEditing);
   }
 
   useEffect(() => {
@@ -218,8 +213,6 @@ function LetterDetails() {
   const editedTypeHandler = (event) => {
     const editedSavedMessage = event.target.value;
     setEditedMessage(editedSavedMessage);
-    console.log('!!!!!',editedMessage);
-    console.log('editedSavedMessage',editedSavedMessage);
   }
 
   const editedAddHandler = (e) => {
@@ -234,7 +227,6 @@ function LetterDetails() {
         const newEditedLetters = letters.map((letter)=>
         letter.id === id ? {...letter, message: editedMessage}
          : letter);
-        console.log('newEditedLetters',newEditedLetters);
         setLetters(newEditedLetters);
         alert("Your changes has been successfully updated!");
         setIsEditing(false);
@@ -245,8 +237,6 @@ function LetterDetails() {
 
   return (
     <div>
-      {console.log("letters in detail page", letters)}
-      {/* 데이터 들어오는 것 확인 */}
       <GlobalStyle />
       <Header/>
       <Main>
