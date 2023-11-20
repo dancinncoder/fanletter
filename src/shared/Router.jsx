@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Home from '../pages/Home';
 import LetterDetails from '../pages/LetterDetails';
 
@@ -32,6 +32,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<Home letters={letters} setLetters={setLetters}/>}/>
         <Route path="letter-details/:id" element={<LetterDetails letters={letters} setLetters={setLetters}/>}/>
+        <Route path="*" element={<Navigate replace to="/" />}></Route>
       </Routes>
     </BrowserRouter>
 

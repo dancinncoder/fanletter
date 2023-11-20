@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     /* font-family: Arial, Helvetica, sans-serif; */
   }
+
+  
 `;
 
 export default GlobalStyle;
