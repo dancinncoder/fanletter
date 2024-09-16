@@ -1,45 +1,47 @@
-import React, { useEffect, useRef } from 'react'
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
-import GlobalStyle from '../GlobalStyle';
-import goHomeBtn2 from '../assets/gohome-icon2.png';
-import UserIcon from '../components/UserIcon';
-import Header from 'components/Header';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteLetter, editLetter } from 'redux/modules/letters';
+import React, { useEffect, useRef } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
+import GlobalStyle from "../GlobalStyle";
+import goHomeBtn2 from "../assets/gohome-icon2.png";
+import UserIcon from "../components/UserIcon";
+import Header from "components/Header";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteLetter, editLetter } from "redux/modules/letters";
 
 function LetterDetails() {
   const dispatch = useDispatch();
-  const letters = useSelector(state=>state.letters);
+  const letters = useSelector((state) => state.letters);
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const userName = location.state.userName;
-  const createdAt = location.state.createdAt;
-  const wroteTo = location.state.wroteTo;
+  // const userName = location.state.userName;
+  // const createdAt = location.state.createdAt;
+  // const wroteTo = location.state.wroteTo;
   const message = location.state.message;
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const messageRef = useRef(message);
 
-  let filtered = letters?.find((item)=>item.id === id );
-  console.log('filtered',filtered);
-  
+  let filtered = letters?.find((item) => item.id === id);
+  // console.log('filtered',filtered);
+
   const deleteLetterHandler = () => {
-    if(window.confirm("Are you sure you want to delete the letter?") === true){
+    if (
+      window.confirm("Are you sure you want to delete the letter?") === true
+    ) {
       dispatch(deleteLetter(id));
       alert("your letter has been successfully deleted!");
       navigate("../");
     } else {
       return false;
     }
-  }
+  };
 
   const editHandler = () => {
     setIsEditing(!isEditing);
-    console.log('setIsEditing is...', isEditing);
-  }
+    // console.log("setIsEditing is...", isEditing);
+  };
 
   useEffect(() => {
     // focus when it is edit mode
@@ -54,51 +56,70 @@ function LetterDetails() {
   const editedTypeHandler = (event) => {
     const editedSavedMessage = event.target.value;
     setEditedMessage(editedSavedMessage);
-  }
+  };
 
   const editedAddHandler = (event) => {
     event.preventDefault();
     // validation check
-    if(message === editedMessage){
+    if (message === editedMessage) {
       alert("There is no any change");
     } else {
-      if(window.confirm("Are you sure you want to save the changes?") === true) {
-        dispatch(editLetter({id, editedMessage}));
+      if (
+        window.confirm("Are you sure you want to save the changes?") === true
+      ) {
+        dispatch(editLetter({ id, editedMessage }));
         alert("Your changes has been successfully updated!");
         setIsEditing(false);
       } else {
         return;
       }
     }
-
   };
 
   return (
     <div>
       <GlobalStyle />
-      <Header/>
+      <Header />
       <Main>
         <BtnArea>
-          <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>
+          <GoHomeBtn2
+            src={goHomeBtn2}
+            alt="Go Home Button with Timmy Image"
+            onClick={() => {
+              navigate(-1);
+            }}
+          ></GoHomeBtn2>
         </BtnArea>
-        {isEditing? (
+        {isEditing ? (
           <>
             <Letter>
               <UserNameAndCreatedAt>
                 <UserInfo>
                   <UserIcon />
                   <p>{filtered.userName}</p>
-                  </UserInfo>
-                  <CreatedAt>{filtered.createdAt}</CreatedAt>
+                </UserInfo>
+                <CreatedAt>{filtered.createdAt}</CreatedAt>
               </UserNameAndCreatedAt>
               <WroteTo>To: {filtered.wroteTo}</WroteTo>
               <Form onSubmit={editedAddHandler}>
-                <Message><Textarea onChange={editedTypeHandler} ref={messageRef}>{filtered.message}</Textarea></Message>
+                <Message>
+                  <Textarea onChange={editedTypeHandler} ref={messageRef}>
+                    {filtered.message}
+                  </Textarea>
+                </Message>
               </Form>
             </Letter>
             <EditBtnArea>
-              <Button type="submit" alt="Save Button" onClick={editedAddHandler} >Save</Button>
-              <Button alt="Cancel Button" onClick={editHandler} >Cancel</Button>
+              <Button
+                type="submit"
+                alt="Save Button"
+                onClick={editedAddHandler}
+              >
+                Save
+              </Button>
+              <Button alt="Cancel Button" onClick={editHandler}>
+                Cancel
+              </Button>
             </EditBtnArea>
           </>
         ) : (
@@ -106,7 +127,7 @@ function LetterDetails() {
             <Letter>
               <UserNameAndCreatedAt>
                 <UserInfo>
-                <UserIcon />
+                  <UserIcon />
                   <p>{filtered.userName}</p>
                 </UserInfo>
                 <CreatedAt>{filtered.createdAt}</CreatedAt>
@@ -115,14 +136,24 @@ function LetterDetails() {
               <Message>{filtered.message}</Message>
             </Letter>
             <EditBtnArea>
-              <Button alt="Edit Button" onClick={editHandler}>Edit</Button>
-              <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
-              <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
+              <Button alt="Edit Button" onClick={editHandler}>
+                Edit
+              </Button>
+              <Button alt="Delete Button" onClick={deleteLetterHandler}>
+                Delete
+              </Button>
+              <Button
+                alt="Back Button"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                Back
+              </Button>
             </EditBtnArea>
           </>
-        )}  
+        )}
       </Main>
-
     </div>
   );
 }
@@ -158,11 +189,11 @@ const GoHomeBtn2 = styled.img`
   position: absolute;
   left: 0;
   bottom: 0;
-  max-width:99%;
+  max-width: 99%;
   transition: 0.2s ease;
   cursor: pointer;
   &:hover {
-  transform: scale(1.04);
+    transform: scale(1.04);
   }
 `;
 
@@ -203,15 +234,15 @@ const Button = styled.button`
   &:first-child {
     bottom: 55%;
   }
-  &:nth-child(2){
+  &:nth-child(2) {
     bottom: 43%;
   }
-  &:nth-child(3){
+  &:nth-child(3) {
     bottom: 31%;
   }
 `;
 
-export default LetterDetails
+export default LetterDetails;
 
 const UserNameAndCreatedAt = styled.div`
   display: flex;
@@ -264,7 +295,7 @@ const Textarea = styled.textarea`
   background-color: #e5e3e3;
   resize: none;
   overflow-y: hidden;
-  font-family: 'Apple SD Gothic Neo';
+  font-family: "Apple SD Gothic Neo";
   font-size: 1.2rem;
   font-weight: 400;
   color: #606060;
@@ -286,5 +317,3 @@ const Form = styled.form`
   padding: 0px;
   margin: 0;
 `;
-
-

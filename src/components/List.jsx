@@ -1,23 +1,30 @@
-import React from 'react'
-import {styled} from "styled-components";
-import { Link } from 'react-router-dom';
-import UserIcon from './UserIcon';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
-
+import React from "react";
+import { styled } from "styled-components";
+import { Link } from "react-router-dom";
+import UserIcon from "./UserIcon";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import moment from "moment";
 
 function List() {
   const letterShown = useSelector((state) => state.character);
-  const letters = useSelector((state)=> state.letters);
+  const letters = useSelector((state) => state.letters);
 
-  const filteredByNameList = letters.filter((letter)=>{
-    return letterShown[letter.wroteTo];
-  })
+  const filteredByNameList = letters
+    .filter((letter) => letterShown[letter.wroteTo])
+    .sort((a, b) =>
+      moment(b.createdAt, "YY-MM-DD HH:mm").diff(
+        moment(a.createdAt, "YY-MM-DD HH:mm")
+      )
+    );
 
   return (
     <ListOuterFrame>
       <ListArea>
-      {filteredByNameList.length === 0 ? (
-          <h4>There are no fan letters saved.<br /> Be the first one to post a fan letter!</h4>
+        {filteredByNameList.length === 0 ? (
+          <h4>
+            There are no fan letters saved.
+            <br /> Be the first one to post a fan letter!
+          </h4>
         ) : (
           filteredByNameList.map((letter) => (
             <Letter
@@ -42,12 +49,10 @@ function List() {
         )}
       </ListArea>
     </ListOuterFrame>
-
-  )
+  );
 }
 
-export default List
-
+export default List;
 
 const ListArea = styled.div`
   overflow-y: scroll;
@@ -100,7 +105,7 @@ const Letter = styled(Link)`
 const Message = styled.span`
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;  
+  text-overflow: ellipsis;
 `;
 
 const LetterContent = styled.div`

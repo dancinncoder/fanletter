@@ -1,34 +1,30 @@
 // Hooks
-import React from 'react';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { styled } from 'styled-components';
-import GlobalStyle from '../GlobalStyle';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import List from '../components/List';
-import Button from '../components/Button';
-import FormArea from '../components/FormArea';
-import picturePaul from '../assets/dune-Paul.png';
-import { useSelector } from 'react-redux';
-
+import React from "react";
+import { styled } from "styled-components";
+import GlobalStyle from "../GlobalStyle";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import List from "../components/List";
+import Button from "../components/Button";
+import FormArea from "../components/FormArea";
+import picturePaul from "../assets/dune-Paul.png";
+import { useSelector } from "react-redux";
 
 function Home() {
-
-  const letters = useSelector((state)=>{
+  const letters = useSelector((state) => {
     return state.letters;
   });
 
-  const letterShown = useSelector((state)=>{
-    console.log('lettershown state character', state.character);
+  const letterShown = useSelector((state) => {
+    // console.log("lettershown state character", state.character);
     return state.character;
-  })
+  });
 
-  const filteredByName = letters.filter((letter)=>{
-    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
-    console.log('letter.wrote =>',letter.wroteTo);
+  const filteredByName = letters.filter((letter) => {
+    // console.log("clicked category", letterShown[letter.wroteTo]);
+    // console.log("letter.wrote =>", letter.wroteTo);
     return letterShown[letter.wroteTo];
-  })
+  });
 
   return (
     <OuterFrame>
@@ -36,11 +32,16 @@ function Home() {
       <Header />
       <Main>
         <ImgBtnBox>
-          <PicturePaul src={picturePaul} alt="Paul picture"/>
+          <PicturePaul src={picturePaul} alt="Paul picture" />
         </ImgBtnBox>
         <LetterInputOutputArea>
           <h1>Send My Letter</h1>
-          <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
+          <p>
+            <i>
+              Send a letter to one of characters that Timothée's played in roles
+              !
+            </i>
+          </p>
           <FormArea />
           {/* <List letters={filteredByName}/> */}
           <List />
@@ -86,11 +87,11 @@ const PicturePaul = styled.img`
   position: fixed;
   left: 0;
   bottom: 0;
-  max-width:90%;
+  max-width: 90%;
   transition: 0.2s ease;
   cursor: pointer;
   &:hover {
-  transform: scale(1.04);
+    transform: scale(1.04);
   }
 `;
 
@@ -105,5 +106,3 @@ const LetterInputOutputArea = styled.div`
     color: white;
   }
 `;
-
-
