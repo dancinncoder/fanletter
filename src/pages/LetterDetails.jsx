@@ -24,7 +24,6 @@ function LetterDetails() {
   const messageRef = useRef(message);
 
   let filtered = letters?.find((item) => item.id === id);
-  // console.log('filtered',filtered);
 
   const deleteLetterHandler = () => {
     if (
@@ -40,7 +39,6 @@ function LetterDetails() {
 
   const editHandler = () => {
     setIsEditing(!isEditing);
-    // console.log("setIsEditing is...", isEditing);
   };
 
   useEffect(() => {

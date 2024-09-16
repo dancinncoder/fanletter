@@ -17,7 +17,6 @@ function Button() {
   ]);
   const buttonByNameClickHandler = (item) => {
     setSelectedCharacterId(item.id);
-    // console.log('selected id',item.id);
     const allFalse = {
       Paul: false,
       Elio: false,
@@ -25,8 +24,6 @@ function Button() {
       Lee: false,
     };
     dispatch(setCharacter({ ...allFalse, [item.name]: true }));
-    // console.log('button click!',{ ...allFalse, [item.name] : true});
-    // setLetterShown({ ...allFalse, [item.name] : true});
   };
 
   return (
