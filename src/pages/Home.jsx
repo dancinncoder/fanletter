@@ -16,13 +16,10 @@ function Home() {
   });
 
   const letterShown = useSelector((state) => {
-    // console.log("lettershown state character", state.character);
     return state.character;
   });
 
   const filteredByName = letters.filter((letter) => {
-    // console.log("clicked category", letterShown[letter.wroteTo]);
-    // console.log("letter.wrote =>", letter.wroteTo);
     return letterShown[letter.wroteTo];
   });
 
