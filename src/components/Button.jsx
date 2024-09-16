@@ -17,7 +17,7 @@ function Button() {
   ]);
   const buttonByNameClickHandler = (item) => {
     setSelectedCharacterId(item.id);
-    // console.log('선택한 아이디',item.id);
+    // console.log('selected id',item.id);
     const allFalse = {
       Paul: false,
       Elio: false,

@@ -49,7 +49,7 @@ function FormArea() {
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
   useEffect(() => {
     setFormValue(selectedCharacter);
-    // console.log("최초 selected name is :", selectedCharacter);
+    // console.log("very first selected name is :", selectedCharacter);
   }, []);
 
   // SELECTING OPTION SETTING
@@ -75,7 +75,7 @@ function FormArea() {
       message: message,
       wroteTo: selectedCharacter,
     };
-    // console.log("입력값으로 만들어진 객체", newLetter);
+    // console.log("object made with new input", newLetter);
     const userNameLength = userName.trim().length;
     const messageLength = message.trim().length;
 
@@ -111,9 +111,8 @@ function FormArea() {
   return (
     <Form onSubmit={addHandler}>
       {/* {console.log("letters at form area", letters)} */}
-      {/* 데이터 들어오는거 확인 */}
       <ToUserName>
-        {/* name은 옵션값의 Key 명이 될 이름이다. */}
+        {/* 'name' will be the name of Key */}
         To...
         <select name="wroteTo" value={letters.wroteTo} onChange={selectHandler}>
           <option value="Paul">Paul</option>
